@@ -205,7 +205,8 @@
   .cmt-top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:20px;flex-wrap:wrap}
   .cmt-title-block{flex:1;min-width:0}
   .cmt-title-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
-  .cmt-signin-hint{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#111;font-weight:600;background:#fff;border:1.5px solid #ccc;border-radius:8px;padding:6px 13px;white-space:nowrap;flex-shrink:0;align-self:flex-start}
+  .cmt-signin-hint{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#111;font-weight:600;background:#fff;border:1.5px solid #ccc;border-radius:8px;padding:6px 13px;white-space:nowrap;flex-shrink:0;align-self:flex-start;cursor:pointer;transition:box-shadow .2s,transform .15s}
+  .cmt-signin-hint:hover{box-shadow:0 3px 12px rgba(0,0,0,.15);transform:translateY(-1px)}
 
   .comments-title-row{display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-wrap:wrap}
   .comments-dot{width:7px;height:7px;background:var(--red);border-radius:2px;box-shadow:0 0 8px var(--red);flex-shrink:0}
@@ -598,10 +599,10 @@
         <p class="comments-sub">Share your experience using WX Converter</p>
       </div>
       <!-- kanan atas: sign in hint (hilang saat sudah login) -->
-      <div class="cmt-signin-hint" id="cmtSigninHint">
+      <button class="cmt-signin-hint" id="cmtSigninHint" type="button">
         <svg width="13" height="13" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         Sign in to post a review
-      </div>
+      </button>
     </div>
 
     <!-- Write form (muncul saat login & belum punya komentar) -->
@@ -38210,13 +38211,35 @@ run();
   function processArrayBuffer(arrayBuffer){
     return new Promise(function(resolve,reject){
       var AC=window.AudioContext||window.webkitAudioContext;
-      var ctx=new AC();
-      var done=ctx.decodeAudioData(arrayBuffer.slice(0));
-      if(!done||typeof done.then!=="function"){
-        ctx.decodeAudioData(arrayBuffer.slice(0), function(b){ ctx.close(); render(b,resolve,reject); }, function(e){ ctx.close(); reject(e||new Error("decode gagal")); });
-        return;
+      if(!AC){ reject(new Error("AudioContext tidak didukung browser ini")); return; }
+      var ctx;
+      try{ ctx=new AC(); }catch(e){ reject(e); return; }
+
+      function afterDecode(decoded){
+        try{ ctx.close(); }catch(e){}
+        render(decoded,resolve,reject);
       }
-      done.then(function(decoded){ ctx.close(); render(decoded,resolve,reject); }).catch(function(e){ ctx.close(); reject(e); });
+      function onDecodeError(e){
+        try{ ctx.close(); }catch(err){}
+        reject(e||new Error("decode gagal"));
+      }
+
+      function doDecode(){
+        try{
+          var result=ctx.decodeAudioData(arrayBuffer.slice(0), afterDecode, onDecodeError);
+          // browser modern return Promise — tangani juga supaya tidak jadi unhandled rejection
+          if(result&&typeof result.then==="function"){
+            result.then(null).catch(function(){}); // error sudah ditangani callback di atas
+          }
+        }catch(e){ onDecodeError(e); }
+      }
+
+      // Pastikan AudioContext tidak suspended (autoplay policy di browser modern)
+      if(ctx.state==="suspended"&&typeof ctx.resume==="function"){
+        ctx.resume().then(doDecode).catch(doDecode);
+      }else{
+        doDecode();
+      }
     });
   }
 
@@ -38297,7 +38320,7 @@ run();
     setBusy(true); processBtn.disabled=true; showProgress(); setProgress(20,tr("readProg"));
     outputCard.classList.remove("show");
     var fr=new FileReader();
-    fr.onload=function(){ setProgress(35,tr("decodeProg")); processArrayBuffer(fr.result).then(function(res){ complete(res,title,false); }).catch(function(){ toast(tr("errDecode"),"error"); failAll(); }); };
+    fr.onload=function(){ setProgress(35,tr("decodeProg")); processArrayBuffer(fr.result).then(function(res){ complete(res,title,false); }).catch(function(e){ var msg=e&&e.message?e.message:tr("errDecode"); toast(msg,"error"); failAll(); }); };
     fr.onerror=function(){ toast(tr("errRead"),"error"); failAll(); };
     fr.readAsArrayBuffer(file);
   }
@@ -38684,6 +38707,12 @@ const hdrName     = $("hdrName");
 const hdrLogout   = $("hdrLogout");
 
 if(hdrLoginBtn) hdrLoginBtn.addEventListener("click", async()=>{
+  try{ await signInWithPopup(auth, new GoogleAuthProvider()); }
+  catch(e){ showToastCmt("Sign-in failed: " + e.message, "error"); }
+});
+
+const cmtSigninHintBtn = $("cmtSigninHint");
+if(cmtSigninHintBtn) cmtSigninHintBtn.addEventListener("click", async()=>{
   try{ await signInWithPopup(auth, new GoogleAuthProvider()); }
   catch(e){ showToastCmt("Sign-in failed: " + e.message, "error"); }
 });
