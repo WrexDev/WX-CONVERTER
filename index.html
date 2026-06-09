@@ -177,9 +177,9 @@
   .table-scroll{overflow-x:auto}
   table{width:100%;border-collapse:collapse;font-size:12px;min-width:440px}
   thead th{text-align:left;color:var(--muted);font-weight:500;text-transform:uppercase;font-size:10px;letter-spacing:1px;padding:0 12px 12px;border-bottom:1px solid var(--line)}
-  tbody td{padding:13px 12px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+  tbody td{padding:10px 8px;border-bottom:1px solid var(--line-soft);vertical-align:middle;white-space:nowrap}
   tbody tr:hover{background:var(--card-hover)}
-  td .t-title{font-weight:500;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  td .t-title{font-weight:500;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical}
   td .t-date{color:var(--muted);font-size:11px}
   .badge{display:inline-block;font-size:10px;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
   .badge.accepted{background:rgba(53,224,127,.12);color:var(--green);border:1px solid rgba(53,224,127,.3)}
@@ -198,8 +198,8 @@
   .btn-del .em-white{font-size:15px}
   .btn-del:hover{background:rgba(255,59,59,.14);transform:scale(1.1)}
   td.del-cell{text-align:right;white-space:nowrap}
-  .hist-pbspeed-chip{display:inline-flex;align-items:center;gap:6px;position:relative}
-  .hist-pbspeed-val{font-family:'Inter',sans-serif;font-weight:700;font-size:12px;color:var(--white);letter-spacing:.2px}
+  .hist-pbspeed-chip{display:inline-flex;align-items:center;gap:6px;position:relative;white-space:nowrap}
+  .hist-pbspeed-val{font-family:'Inter',sans-serif;font-weight:700;font-size:12px;color:var(--white);letter-spacing:.2px;white-space:nowrap}
   .hist-pbspeed-copy{background:transparent;border:none;cursor:pointer;padding:0 2px;font-size:14px;line-height:1;opacity:.7;transition:transform .15s,opacity .2s;color:var(--white)}
   .hist-pbspeed-copy:hover{opacity:1;transform:scale(1.18)}
   .hist-pbspeed-toast{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%) translateY(4px);background:#1a1a2a;border:1px solid var(--line);border-radius:8px;padding:5px 11px;font-size:11px;color:var(--white);white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none;z-index:70;font-weight:600;letter-spacing:.3px}
@@ -386,6 +386,14 @@
     .pbspeed-chip{padding:6px 8px;flex:1 1 100%}
     .pbspeed-chip .val{font-size:11px}
     .pbspeed-chip .copy-btn{font-size:12px}
+    /* history table mobile */
+    table{min-width:0;width:100%}
+    thead th{padding:0 6px 10px;font-size:9px;letter-spacing:.3px}
+    tbody td{padding:8px 6px;font-size:11px}
+    td .t-title{max-width:140px;-webkit-line-clamp:2;white-space:normal}
+    .hist-pbspeed-val{font-size:10px}
+    .hist-pbspeed-copy{font-size:12px}
+    td.del-cell{padding:8px 4px}
   }
   /* ===== header controls + tutorial button ===== */
   .header-controls{display:flex;align-items:flex-end;gap:0}
@@ -528,7 +536,7 @@
       <span class="arr">→</span>
       <span><b>3</b> <span data-i18n="step3">Download OGG</span></span>
     </div>
-    <h2><span class="accent">WX Converter</span><span class="hero-sub" data-i18n="heroFor">for Roblox</span></h2>
+    <h2><span class="accent">WX Converter</span><span class="hero-sub" data-i18n="heroFor">Bypass Audio Roblox Kamu</span></h2>
     <p data-i18n-html="heroP">Upload your audio — the system speeds it up and applies the preset gain, then you download a properly edited <b>.ogg</b> file.</p>
   </section>
 
@@ -38091,7 +38099,7 @@ run();
   var I18N={
     en:{
       step1:"Upload audio", step2:"Encoder process", step3:"Download OGG",
-      heroFor:"for Roblox",
+      heroFor:"Bypass Audio Roblox Kamu",
       heroP:'Upload your audio — the system speeds it up and applies the preset gain, then you download a properly edited <b>.ogg</b> file.',
       presetActive:"Active Preset", dropTitle:"Upload Audio File",
       dropSub:"Click or drag a file here — mp3, wav, m4a, or ogg",
@@ -38113,7 +38121,7 @@ run();
       tip:'This is the <b>Normal Speed</b> value for this audio. After you upload the file to Roblox, open your <b>MusicConfig</b> and set the <b>PlaybackSpeed</b> to <b>{r}</b> so the music plays at a normal speed in-game.',
       deleteTitle:"Delete entry", st_accepted:"Accepted", st_pending:"Pending", st_rejected:"Rejected",
       // tutorial
-      tutBtn:"Tutorial", tutBack:"Back to main page",
+      tutBtn:"Tutorial", tutBack:"Back",
       tutTag:"Tutorial", tutTitle:"How To Use",
       tutIntro:"A complete guide to using the WX Music System and WX Converter from start to finish.",
       tutBuyTitle:"Don't have the WX Music System yet?",
@@ -38125,7 +38133,7 @@ run();
     },
     id:{
       step1:"Upload audio", step2:"Proses Encoder", step3:"Download OGG",
-      heroFor:"untuk Roblox",
+      heroFor:"Bypass Audio Roblox Kamu",
       heroP:'Upload file audiomu — sistem mempercepat & menerapkan gain sesuai preset, lalu kamu unduh file <b>.ogg</b> yang sudah benar-benar diedit.',
       presetActive:"Preset Aktif", dropTitle:"Upload File Audio",
       dropSub:"Klik atau seret file ke sini — format mp3, wav, m4a, atau ogg",
@@ -38146,7 +38154,7 @@ run();
       tip:'Ini angka <b>Normal Speed</b> untuk audio ini. Setelah file kamu upload ke Roblox, buka <b>MusicConfig</b> lalu atur <b>PlaybackSpeed</b> ke <b>{r}</b> supaya musik kedengaran normal saat dimainkan in-game.',
       deleteTitle:"Hapus riwayat", st_accepted:"Accepted", st_pending:"Pending", st_rejected:"Rejected",
       // tutorial
-      tutBtn:"Tutorial", tutBack:"Kembali ke main page",
+      tutBtn:"Tutorial", tutBack:"Back",
       tutTag:"Tutorial", tutTitle:"Cara Pakai",
       tutIntro:"Panduan lengkap untuk menggunakan WX Music System dan WX Converter sampai selesai.",
       tutBuyTitle:"Belum Punya WX Music System?",
