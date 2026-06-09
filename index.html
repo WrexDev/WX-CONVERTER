@@ -120,13 +120,23 @@
   .btn-process svg{width:16px;height:16px}
 
   /* normal-speed info chip + tooltip */
-  .info-chip{position:relative;display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;background:rgba(255,59,59,.06);border:1px solid var(--red-dim);border-radius:11px;padding:10px 14px;cursor:help}
-  .info-chip .lab{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
-  .info-chip .val{font-family:'Inter',sans-serif;font-weight:800;font-size:16px;color:var(--red);line-height:1}
-  .info-chip .qm{width:15px;height:15px;border-radius:50%;background:var(--line);color:var(--muted);display:grid;place-items:center;font-size:10px;font-weight:700}
-  .info-chip .tip-box{position:absolute;bottom:calc(100% + 10px);left:0;width:min(290px,82vw);background:#15151f;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:11px;line-height:1.6;color:var(--white);box-shadow:0 12px 30px rgba(0,0,0,.6);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s,transform .2s,visibility .2s;z-index:60;text-transform:none;letter-spacing:0;font-weight:400}
-  .info-chip:hover .tip-box{opacity:1;visibility:visible;transform:translateY(0)}
+  .chips-row{display:flex;gap:6px;margin-bottom:16px;align-items:stretch;flex-wrap:nowrap;overflow:visible}
+
+  .info-chip{position:relative;display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:0;background:rgba(255,59,59,.06);border:1px solid var(--red-dim);border-radius:11px;padding:10px 12px;box-sizing:border-box;flex:1 1 0;white-space:nowrap}
+  .info-chip .lab{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);white-space:nowrap;flex-shrink:1;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .info-chip .val{font-family:'Inter',sans-serif;font-weight:800;font-size:14px;color:var(--red);line-height:1;white-space:nowrap;flex-shrink:0}
+  .info-chip .tip-box{position:fixed;width:min(290px,82vw);background:linear-gradient(135deg,#12121e 0%,#1a1a2e 100%);border:1px solid rgba(255,59,59,.35);border-radius:12px;padding:14px 16px;font-size:11px;line-height:1.65;color:var(--white);box-shadow:0 12px 30px rgba(0,0,0,.7),0 0 0 1px rgba(255,59,59,.1),inset 0 1px 0 rgba(255,255,255,.05);opacity:0;visibility:hidden;transform:none;transition:opacity .2s,visibility .2s;z-index:99999;text-transform:none;letter-spacing:0;font-weight:400;white-space:normal;word-break:break-word;pointer-events:none}
+  .info-chip .tip-box::before{content:"INFO";display:block;font-size:9px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px;padding-bottom:7px;border-bottom:1px solid rgba(255,59,59,.2)}
+  .info-chip:hover .tip-box,.info-chip:focus .tip-box{opacity:1;visibility:visible}
   .info-chip .tip-box b{color:var(--red)}
+  /* playback speed copy chip */
+  .pbspeed-chip{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:0;background:rgba(255,59,59,.06);border:1px solid var(--red-dim);border-radius:11px;padding:10px 12px;position:relative;box-sizing:border-box;flex:1 1 0;min-width:0;white-space:nowrap}
+  .pbspeed-chip .lab{display:none}
+  .pbspeed-chip .val{font-family:'Inter',sans-serif;font-weight:700;font-size:13px;color:var(--white);line-height:1;letter-spacing:.2px;white-space:nowrap;flex-shrink:1;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .pbspeed-chip .copy-btn{background:transparent;border:none;cursor:pointer;padding:0 2px;font-size:15px;line-height:1;transition:transform .15s,opacity .2s;opacity:.9;color:#fff;margin-left:auto}
+  .pbspeed-chip .copy-btn:hover{opacity:1;transform:scale(1.15)}
+  .pbspeed-chip .copy-toast{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);background:#1a1a2a;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:11px;color:var(--white);white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none;z-index:70}
+  .pbspeed-chip .copy-toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
 
   .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -141,8 +151,8 @@
   #outputCard{display:none;margin-top:22px}
   #outputCard.show{display:block;animation:slideUp .5s cubic-bezier(.2,.8,.2,1)}
   @keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-  .ok-badge,.demo-badge{display:none;align-items:center;gap:6px;font-size:11px;border-radius:999px;padding:4px 12px;margin-bottom:16px;width:fit-content}
-  .ok-badge{color:var(--green);background:rgba(53,224,127,.1);border:1px solid rgba(53,224,127,.3)}
+  .ok-badge,.demo-badge{display:none;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:600;border-radius:11px;padding:10px 12px;margin-bottom:0;flex:1 1 0;min-width:0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ok-badge{color:var(--green);background:rgba(53,224,127,.08);border:1px solid rgba(53,224,127,.3)}
   .demo-badge{color:var(--amber);background:rgba(255,177,59,.1);border:1px solid rgba(255,177,59,.3)}
   .ok-badge.show,.demo-badge.show{display:inline-flex}
 
@@ -184,10 +194,16 @@
   .badge-popup .bp-title{font-weight:700;font-size:12px;margin-bottom:5px;display:flex;align-items:center;gap:6px}
   .btn-clear{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:8px 14px;font-family:'Inter',sans-serif;font-size:11px;cursor:pointer;transition:all .2s}
   .btn-clear:hover{border-color:var(--red);color:var(--red)}
-  .btn-del{background:transparent;border:none;cursor:pointer;padding:5px;border-radius:8px;line-height:1;font-size:15px;transition:background .2s,transform .15s}
+  .btn-del{background:transparent;border:none;cursor:pointer;padding:5px;border-radius:8px;line-height:1;font-size:15px;transition:background .2s,transform .15s;color:unset}
   .btn-del .em-white{font-size:15px}
   .btn-del:hover{background:rgba(255,59,59,.14);transform:scale(1.1)}
   td.del-cell{text-align:right;white-space:nowrap}
+  .hist-pbspeed-chip{display:inline-flex;align-items:center;gap:6px;position:relative}
+  .hist-pbspeed-val{font-family:'Inter',sans-serif;font-weight:700;font-size:12px;color:var(--white);letter-spacing:.2px}
+  .hist-pbspeed-copy{background:transparent;border:none;cursor:pointer;padding:0 2px;font-size:14px;line-height:1;opacity:.7;transition:transform .15s,opacity .2s;color:var(--white)}
+  .hist-pbspeed-copy:hover{opacity:1;transform:scale(1.18)}
+  .hist-pbspeed-toast{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%) translateY(4px);background:#1a1a2a;border:1px solid var(--line);border-radius:8px;padding:5px 11px;font-size:11px;color:var(--white);white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none;z-index:70;font-weight:600;letter-spacing:.3px}
+  .hist-pbspeed-toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
 
   footer{text-align:center;margin-top:50px;padding-top:28px;border-top:1px solid var(--line-soft);color:var(--muted-2);font-size:11px;letter-spacing:1px}
 
@@ -550,14 +566,18 @@
 
   <section class="card" id="outputCard">
     <div class="card-title no-dot" data-i18n="resultTitle">Conversion Result</div>
-    <div class="ok-badge" id="okBadge">Audio edited</div>
-    <div class="demo-badge" id="demoBadge" data-i18n="demoBadge">⚠ Demo Mode — using a sample because the source could not be fetched</div>
-
-    <div class="info-chip" id="infoChip" tabindex="0">
-      <span class="lab" data-i18n="normalSpeedLabel">Normal Speed (in-game)</span>
-      <span class="val" id="normalSpeedVal">2.3</span>
-      <span class="qm">?</span>
-      <span class="tip-box" id="normalSpeedTip"></span>
+    <div class="chips-row">
+      <div class="ok-badge" id="okBadge">Audio edited</div>
+      <div class="demo-badge" id="demoBadge" data-i18n="demoBadge">⚠ Demo Mode — using a sample because the source could not be fetched</div>
+      <div class="info-chip" id="infoChip">
+        <span class="lab" data-i18n="normalSpeedLabel">Normal Speed (in-game)</span>
+        <span class="val" id="normalSpeedVal">2.3</span>
+      </div>
+      <div class="pbspeed-chip" id="pbspeedChip">
+        <span class="val" id="pbspeedVal">PlaybackSpeed = 2.3,</span>
+        <button class="copy-btn" id="pbspeedCopyBtn" title="Copy PlaybackSpeed">&#128464;</button>
+        <span class="copy-toast" id="pbspeedToast">Copied!</span>
+      </div>
     </div>
 
     <div class="track-info">
@@ -592,7 +612,7 @@
     </div>
     <div class="table-scroll">
       <table>
-        <thead><tr><th>#</th><th data-i18n="thTitle">Title</th><th>Status</th><th data-i18n="thNormalSpeed">Normal Speed</th><th data-i18n="thDate">Date</th><th></th></tr></thead>
+        <thead><tr><th>#</th><th data-i18n="thTitle">Title</th><th data-i18n="thNormalSpeed">Normal Speed</th><th data-i18n="thDate">Date</th><th></th></tr></thead>
         <tbody id="histBody"></tbody>
       </table>
     </div>
@@ -38038,7 +38058,7 @@ run();
   var progressWrap=el("progressWrap"), progressFill=el("progressFill"), progressPct=el("progressPct"), progressStage=el("progressStage");
   var outputCard=el("outputCard"), okBadge=el("okBadge"), demoBadge=el("demoBadge");
   var audioPlayer=el("audioPlayer"), outTitle=el("outTitle"), outDuration=el("outDuration"), outSpeed=el("outSpeed"), outGain=el("outGain");
-  var normalSpeedVal=el("normalSpeedVal"), normalSpeedTip=el("normalSpeedTip");
+  var normalSpeedVal=el("normalSpeedVal");
   var downloadBtn=el("downloadBtn");
   var historySection=el("historySection"), histBody=el("histBody"), clearBtn=el("clearBtn");
 
@@ -38054,7 +38074,7 @@ run();
   function formatSize(b){ if(b==null)return"—"; if(b<1024)return b+" B"; if(b<1048576)return (b/1024).toFixed(1)+" KB"; return (b/1048576).toFixed(2)+" MB"; }
   function normalSpeedFor(speed){ if(speed===2.3) return "2.3"; return (speed-0.1).toFixed(1); }  // 2.3x -> 2.3
   function robloxPlaybackFor(speed){ return (1/speed).toFixed(2); }           // contoh: 2.3x -> 0.43
-  function randomStatus(){ var r=Math.random(); return r<0.65?"accepted":(r<0.88?"pending":"rejected"); }
+
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
 
   // ---------- i18n (default: English) ----------
@@ -38364,7 +38384,7 @@ run();
     currentBlobUrl=URL.createObjectURL(res.blob);
     audioPlayer.src=currentBlobUrl; audioPlayer.load();
 
-    var status=randomStatus();
+    var status="accepted";
     var durStr=formatDuration(res.duration);
     var nSpeed=normalSpeedFor(SPEED);            // mis. 2.2 untuk 2.3x
     var rbx=robloxPlaybackFor(SPEED);            // mis. 0.43 untuk 2.3x
@@ -38377,6 +38397,7 @@ run();
     outGain.innerHTML=gainStr(GAIN_DB);
     lastResult.isDemo=isDemo;
     normalSpeedVal.textContent=nSpeed;
+    var _pbVal=el("pbspeedVal"); if(_pbVal) _pbVal.textContent="PlaybackSpeed = "+nSpeed+",";
     refreshResultText();
 
     okBadge.classList.toggle("show",!isDemo);
@@ -38399,9 +38420,38 @@ run();
     if(!lastResult) return;
     var sp=lastResult.speed||SPEED, gn=(lastResult.gain==null?GAIN_DB:lastResult.gain);
     okBadge.textContent=tr("okBadge",{s:sp,g:gainStr(gn)});
-    normalSpeedTip.innerHTML=tr("tip",{s:sp,r:normalSpeedFor(sp)});
   }
 
+  // ---------- playback speed copy ----------
+  (function(){
+    var copyBtn=el("pbspeedCopyBtn"), copyToast=el("pbspeedToast"), _toastTimer=null;
+    if(!copyBtn) return;
+    copyBtn.addEventListener("click",function(e){
+      e.stopPropagation();
+      var valEl=el("pbspeedVal");
+      var txt=valEl?valEl.textContent.trim():"";
+      if(!txt) return;
+      try{
+        navigator.clipboard.writeText(txt).then(function(){
+          showCopyToast();
+        }).catch(function(){ fallbackCopy(txt); });
+      }catch(ex){ fallbackCopy(txt); }
+    });
+    function fallbackCopy(t){
+      var ta=document.createElement("textarea"); ta.value=t;
+      ta.style.cssText="position:fixed;opacity:0;top:0;left:0";
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try{document.execCommand("copy");}catch(e){}
+      document.body.removeChild(ta);
+      showCopyToast();
+    }
+    function showCopyToast(){
+      if(!copyToast) return;
+      copyToast.classList.add("show");
+      clearTimeout(_toastTimer);
+      _toastTimer=setTimeout(function(){copyToast.classList.remove("show");},2000);
+    }
+  })();
   // ---------- download ----------
   downloadBtn.addEventListener("click",function(){
     if(!lastResult||!lastResult.blob){ toast(tr("errNoAudio"),"error"); return; }
@@ -38434,15 +38484,24 @@ run();
       var d=new Date(x.date);
       var ds=d.toLocaleDateString(loc,{day:"2-digit",month:"short"})+" "+d.toLocaleTimeString(loc,{hour:"2-digit",minute:"2-digit"});
       var t=escapeHtml(x.title);
-      var lab=tr("st_"+x.status)||x.status;
       var sp=x.speed||2.3;
       var ns=x.normalSpeed||normalSpeedFor(sp);
+      var pbVal="PlaybackSpeed = "+ns+",";
+      var nsNum=parseFloat(ns);
+      var nsColor=(nsNum===2.3?"var(--green)":nsNum===2.4?"#4da6ff":nsNum===2.6?"#b07cff":"var(--white)");
       var tip=tr("tip",{s:sp,r:normalSpeedFor(sp)}).replace(/<\/?b>/g,"");
+      var pbLabel="PlaybackSpeed = <span style=\'color:"+nsColor+";font-weight:800\'>"+escapeHtml(ns)+"</span>,";
+      var copyVal="PlaybackSpeed = "+ns+",";
       return "<tr><td>"+(i+1)+"</td><td><div class='t-title' title='"+t+"'>"+t+"</div></td>"+
-             "<td><span class='badge "+x.status+"' data-status='"+x.status+"'>"+lab+"</span></td>"+
-             "<td title='"+escapeHtml(tip)+"' style='cursor:help'><b style='color:var(--red)'>"+ns+"</b></td>"+
+             "<td>"+
+               "<span class='hist-pbspeed-chip'>"+
+                 "<span class='hist-pbspeed-val'>"+pbLabel+"</span>"+
+                 "<button class='hist-pbspeed-copy' type='button' data-hcopy='"+escapeHtml(copyVal)+"' title='Copy PlaybackSpeed'>&#128464;</button>"+
+                 "<span class='hist-pbspeed-toast'>Copied!</span>"+
+               "</span>"+
+             "</td>"+
              "<td class='t-date'>"+ds+"</td>"+
-             "<td class='del-cell'><button class='btn-del' type='button' data-del='"+i+"' title='"+escapeHtml(tr("deleteTitle"))+"' aria-label='"+escapeHtml(tr("deleteTitle"))+"'><span class='em-white'>🗑️</span></button></td></tr>";
+             "<td class='del-cell'><button class='btn-del' type='button' data-del='"+i+"' title='"+escapeHtml(tr("deleteTitle"))+"' aria-label='"+escapeHtml(tr("deleteTitle"))+"'>🗑️</button></td></tr>";
     }).join("");
   }
 
@@ -38455,6 +38514,38 @@ run();
     toast(tr("histDeleted"),"info");
   }
   histBody.addEventListener("click",function(e){
+    // history PlaybackSpeed copy button
+    var cpBtn=e.target.closest("[data-hcopy]");
+    if(cpBtn){
+      e.stopPropagation();
+      var txt=cpBtn.getAttribute("data-hcopy")||"";
+      var toastEl=cpBtn.parentNode.querySelector(".hist-pbspeed-toast");
+      function showHistToast(){
+        if(!toastEl) return;
+        toastEl.classList.add("show");
+        clearTimeout(toastEl._t);
+        toastEl._t=setTimeout(function(){ toastEl.classList.remove("show"); },1800);
+      }
+      // decode HTML entities (e.g. &#39; → ')
+      var tmp=document.createElement("textarea");
+      tmp.innerHTML=txt;
+      var decoded=tmp.value;
+      function fallbackHistCopy(t){
+        var ta=document.createElement("textarea");
+        ta.value=t;
+        ta.style.cssText="position:fixed;opacity:0;top:0;left:0";
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        try{ document.execCommand("copy"); showHistToast(); }catch(ex){}
+        document.body.removeChild(ta);
+      }
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(decoded).then(showHistToast).catch(function(){ fallbackHistCopy(decoded); });
+      } else {
+        fallbackHistCopy(decoded);
+      }
+      return;
+    }
     var btn=e.target.closest("[data-del]"); if(!btn) return;
     deleteHistory(parseInt(btn.getAttribute("data-del"),10));
   });
@@ -39227,6 +39318,8 @@ function openEdit(card, content, c){
 
 // ─── kick off ───────────────────────────────────────────────
 loadComments();
+
+
 </script>
 </body>
 </html>
