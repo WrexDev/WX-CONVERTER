@@ -184,6 +184,96 @@
 
   footer{text-align:center;margin-top:50px;padding-top:28px;border-top:1px solid var(--line-soft);color:var(--muted-2);font-size:11px;letter-spacing:1px}
 
+  /* ===== COMMENTS SECTION ===== */
+  #commentsSection{width:100%;background:var(--bg-soft);border-top:1px solid var(--line);padding:56px 0 80px}
+  .comments-inner{max-width:1280px;margin:0 auto;padding:0 48px}
+  @media(max-width:900px){.comments-inner{padding:0 24px}}
+  @media(max-width:600px){.comments-inner{padding:0 14px}}
+
+  /* header */
+  .comments-header{margin-bottom:28px}
+  .comments-title-row{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+  .comments-dot{width:8px;height:8px;background:var(--red);border-radius:2px;box-shadow:0 0 8px var(--red);flex-shrink:0}
+  .comments-heading{font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(18px,2.8vw,26px);line-height:1}
+  .comments-count{font-size:11px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+  .comments-sub{font-size:12px;color:var(--muted);margin-left:20px}
+
+  /* topbar */
+  .cmt-topbar{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+  .cmt-login-box{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .cmt-login-hint{font-size:12px;color:var(--muted)}
+  .cmt-google-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#222;border:none;border-radius:9px;padding:8px 16px;font-family:'Inter',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:box-shadow .2s,transform .15s;box-shadow:0 2px 8px rgba(0,0,0,.18);white-space:nowrap}
+  .cmt-google-btn:hover{box-shadow:0 4px 16px rgba(0,0,0,.26);transform:translateY(-1px)}
+  .cmt-user-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:9px 14px}
+  .cmt-user-info{display:flex;align-items:center;gap:9px}
+  .cmt-username{font-size:13px;font-weight:600;color:var(--white)}
+  .cmt-logout-btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:7px;padding:5px 13px;font-family:inherit;font-size:11px;cursor:pointer;transition:all .2s}
+  .cmt-logout-btn:hover{border-color:var(--red);color:var(--red)}
+
+  /* avatar circle helper */
+  .cmt-av-wrap{position:relative;flex-shrink:0}
+  .cmt-av-wrap img{border-radius:50%;display:block;border:2px solid var(--line)}
+  .cmt-av-letter{display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-dim));color:#fff;font-family:'Inter',sans-serif;font-weight:800;border:2px solid var(--line)}
+
+  /* write-form */
+  .cmt-form-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:24px;animation:slideUp .4s cubic-bezier(.2,.8,.2,1)}
+  .cmt-form-inner{display:flex;gap:14px;align-items:flex-start}
+  .cmt-form-body{flex:1;min-width:0}
+  .cmt-textarea{width:100%;background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--white);font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;resize:vertical;min-height:80px;transition:border-color .2s,box-shadow .2s}
+  .cmt-textarea::placeholder{color:var(--muted-2)}
+  .cmt-textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(255,59,59,.1)}
+  .cmt-form-footer{display:flex;align-items:center;justify-content:space-between;margin-top:9px}
+  .cmt-charcount{font-size:11px;color:var(--muted-2)}
+  .cmt-submit-btn{background:linear-gradient(120deg,var(--red),var(--red-dim));color:#fff;border:none;border-radius:8px;padding:8px 20px;font-family:'Inter',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:transform .15s,box-shadow .2s,opacity .2s;box-shadow:0 4px 14px rgba(255,59,59,.25)}
+  .cmt-submit-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 22px rgba(255,59,59,.35)}
+  .cmt-submit-btn:disabled{opacity:.45;cursor:not-allowed}
+
+  /* grid of cards */
+  .cmt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  @media(max-width:600px){.cmt-grid{grid-template-columns:1fr}}
+  .cmt-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;padding:48px;color:var(--muted);font-size:13px}
+  .cmt-spinner{width:18px;height:18px;border:2px solid var(--line);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite}
+  .cmt-empty{grid-column:1/-1;text-align:center;padding:52px 20px;color:var(--muted);font-size:13px}
+  .cmt-empty-icon{font-size:34px;margin-bottom:10px;opacity:.45}
+
+  /* individual card — left content + right like button */
+  .cmt-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;transition:border-color .25s,box-shadow .25s;display:flex;gap:14px;position:relative;align-items:flex-start}
+  .cmt-card:hover{border-color:var(--red-dim);box-shadow:0 0 22px var(--red-glow)}
+  .cmt-card.is-mine{border-color:rgba(255,59,59,.3)}
+
+  /* left: content */
+  .cmt-card-content{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+  .cmt-card-top{display:flex;align-items:center;gap:9px}
+  .cmt-card-name-row{display:flex;flex-direction:column;gap:1px;min-width:0}
+  .cmt-card-name{font-weight:700;font-size:13px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cmt-card-meta{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .cmt-mine-badge{font-size:10px;color:var(--red);border:1px solid rgba(255,59,59,.3);background:rgba(255,59,59,.07);border-radius:999px;padding:1px 7px}
+  .cmt-edited-tag{font-size:10px;color:var(--muted-2);font-style:italic}
+  .cmt-card-text{font-size:13px;color:var(--white);line-height:1.65;word-break:break-word;white-space:pre-wrap;margin:0}
+  .cmt-card-actions{display:flex;align-items:center;gap:8px;margin-top:2px}
+  .cmt-edit-btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:3px 10px;font-family:inherit;font-size:11px;cursor:pointer;transition:all .2s}
+  .cmt-edit-btn:hover{border-color:var(--red);color:var(--red)}
+
+  /* right: like button */
+  .cmt-like-col{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;padding-top:2px}
+  .cmt-like-btn{background:transparent;border:1.5px solid var(--line);border-radius:10px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;color:var(--muted)}
+  .cmt-like-btn svg{width:17px;height:17px;transition:fill .2s,stroke .2s}
+  .cmt-like-btn:hover:not(.liked):not(.locked){border-color:var(--red);color:var(--red);transform:scale(1.08)}
+  .cmt-like-btn.liked{border-color:var(--red);background:rgba(255,59,59,.12);color:var(--red)}
+  .cmt-like-btn.locked{opacity:.4;cursor:default}
+  .cmt-like-count{font-size:12px;font-weight:700;color:var(--muted);line-height:1}
+  .cmt-like-btn.liked + .cmt-like-count{color:var(--red)}
+
+  /* edit inline */
+  .cmt-edit-wrap{display:flex;flex-direction:column;gap:8px;margin-top:6px;border-top:1px solid var(--line);padding-top:10px}
+  .cmt-edit-area{width:100%;background:var(--bg-soft);border:1px solid var(--red);border-radius:8px;padding:10px 12px;color:var(--white);font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;resize:vertical;min-height:68px}
+  .cmt-edit-area:focus{outline:none;box-shadow:0 0 0 2px rgba(255,59,59,.15)}
+  .cmt-edit-actions{display:flex;gap:8px;justify-content:flex-end}
+  .cmt-save-btn{background:var(--red);color:#fff;border:none;border-radius:7px;padding:6px 15px;font-family:inherit;font-weight:700;font-size:12px;cursor:pointer;transition:background .2s}
+  .cmt-save-btn:hover{background:var(--red-dim)}
+  .cmt-cancel-btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:7px;padding:6px 13px;font-family:inherit;font-size:12px;cursor:pointer;transition:all .2s}
+  .cmt-cancel-btn:hover{border-color:var(--muted);color:var(--white)}
+
   #toasts{position:fixed;bottom:22px;right:22px;display:flex;flex-direction:column;gap:10px;z-index:9999}
   .toast{display:flex;align-items:flex-start;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 16px;font-size:12px;min-width:220px;max-width:340px;box-shadow:0 10px 30px rgba(0,0,0,.5);animation:toastIn .35s cubic-bezier(.2,.8,.2,1);line-height:1.5}
   .toast .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px;background:var(--amber)}
@@ -449,9 +539,68 @@
   </div><!-- /#tutorialPage -->
 
   <footer class="reveal" style="animation-delay:.3s">
-    Free &amp; Open · No Login Required · Client-Side Only
+    Free &amp; Open · Client-Side Only
   </footer>
 </div>
+
+<!-- ===== COMMENTS SECTION (full-width, outside .wrap) ===== -->
+<section id="commentsSection">
+  <div class="comments-inner">
+
+    <!-- Header -->
+    <div class="comments-header">
+      <div class="comments-title-row">
+        <span class="comments-dot"></span>
+        <h2 class="comments-heading">Reviews &amp; Comments</h2>
+        <span class="comments-count" id="commentsCount">0 reviews</span>
+      </div>
+      <p class="comments-sub">Share your experience using WX Converter</p>
+    </div>
+
+    <!-- Auth topbar -->
+    <div class="cmt-topbar">
+      <div class="cmt-login-box" id="cmtLoginBox">
+        <span class="cmt-login-hint">Sign in to post a review</span>
+        <button class="cmt-google-btn" id="cmtLoginBtn" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Sign in with Google
+        </button>
+      </div>
+      <div class="cmt-user-bar" id="cmtUserBar" style="display:none">
+        <div class="cmt-user-info">
+          <div class="cmt-av-wrap" id="cmtAvWrap">
+            <img class="cmt-av-img" id="cmtAvatar" src="" alt="" width="32" height="32" style="border-radius:50%;border:2px solid var(--line)"/>
+          </div>
+          <span class="cmt-username" id="cmtUsername"></span>
+        </div>
+        <button class="cmt-logout-btn" id="cmtLogoutBtn" type="button">Sign out</button>
+      </div>
+    </div>
+
+    <!-- Write form -->
+    <div class="cmt-form-wrap" id="cmtFormWrap" style="display:none">
+      <div class="cmt-form-inner">
+        <div class="cmt-av-wrap" id="cmtFormAvWrap" style="margin-top:2px"></div>
+        <div class="cmt-form-body">
+          <textarea class="cmt-textarea" id="cmtTextarea" placeholder="Write your review…" maxlength="500" rows="3"></textarea>
+          <div class="cmt-form-footer">
+            <span class="cmt-charcount" id="cmtCharCount">0 / 500</span>
+            <button class="cmt-submit-btn" id="cmtSubmitBtn" type="button" disabled>Post</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="cmt-grid" id="cmtList">
+      <div class="cmt-loading" id="cmtLoading">
+        <div class="cmt-spinner"></div>
+        <span>Loading reviews…</span>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <div id="toasts"></div>
 
@@ -38322,6 +38471,389 @@ run();
 
   applyLang("en");
 })();
+</script>
+<!-- ===== FIREBASE SDK ===== -->
+<script type="module">
+// ============================================================
+//  🔧 FIREBASE CONFIG
+//  1. https://console.firebase.google.com → New project
+//  2. Authentication → Sign-in method → Google → Enable
+//  3. Firestore Database → Create database (production mode)
+//  4. Firestore Rules:
+//     rules_version = '2';
+//     service cloud.firestore {
+//       match /databases/{database}/documents {
+//         match /comments/{uid} {
+//           allow read: if true;
+//           allow create: if request.auth != null && request.auth.uid == uid;
+//           allow update: if request.auth != null && request.auth.uid == uid;
+//           allow delete: if false;
+//         }
+//         match /likes/{likeId} {
+//           allow read: if true;
+//           allow create, delete: if request.auth != null
+//             && likeId.matches(request.auth.uid + "_.*");
+//           allow update: if false;
+//         }
+//       }
+//     }
+//  5. Project Settings → Your apps → </> → copy firebaseConfig below
+// ============================================================
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc, query, orderBy }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey:            "AIzaSyAk3t7Mt5jvy_taS7qG9_ig5oabqwWldiw",
+  authDomain:        "wx-converter.firebaseapp.com",
+  projectId:         "wx-converter",
+  storageBucket:     "wx-converter.firebasestorage.app",
+  messagingSenderId: "567208017931",
+  appId:             "1:567208017931:web:9db3acc71a6d6af665070e",
+  measurementId:     "G-Y7WCMRDWM1"
+};
+
+// ─── init ───────────────────────────────────────────────────
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+let currentUser  = null;
+let allComments  = [];
+let myLikes      = new Set(); // set of comment uids I have liked
+const $          = id => document.getElementById(id);
+
+// ─── helpers ────────────────────────────────────────────────
+function escHtml(t){
+  const d = document.createElement("div");
+  d.textContent = t;
+  return d.innerHTML;
+}
+
+function fmtDate(ts){
+  if(!ts) return "";
+  const d = new Date(ts);
+  return d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})
+    + " · " + d.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+}
+
+function showToastCmt(msg, type){
+  const el = document.createElement("div");
+  el.className = "toast " + (type||"info");
+  el.innerHTML = '<div class="dot"></div><div class="msg">' + escHtml(msg) + '</div>';
+  const c = $("toasts");
+  if(c) c.appendChild(el);
+  setTimeout(()=>{ el.classList.add("out"); setTimeout(()=>el.remove(), 400); }, 3000);
+}
+
+// Build avatar element: photo if available, else letter circle
+function makeAv(photo, name, size){
+  const wrap = document.createElement("div");
+  wrap.className = "cmt-av-wrap";
+  if(photo){
+    const img = document.createElement("img");
+    img.src = photo; img.width = size; img.height = size; img.alt = "";
+    img.style.cssText = "border-radius:50%;display:block;border:2px solid var(--line)";
+    img.onerror = ()=>{ wrap.innerHTML=""; wrap.appendChild(letterAv(name, size)); };
+    wrap.appendChild(img);
+  } else {
+    wrap.appendChild(letterAv(name, size));
+  }
+  return wrap;
+}
+
+function letterAv(name, size){
+  const el = document.createElement("div");
+  el.className = "cmt-av-letter";
+  el.style.cssText = `width:${size}px;height:${size}px;font-size:${Math.round(size*.42)}px`;
+  el.textContent = (name||"?")[0].toUpperCase();
+  return el;
+}
+
+// ─── auth ───────────────────────────────────────────────────
+$("cmtLoginBtn").addEventListener("click", async()=>{
+  try{
+    await signInWithPopup(auth, new GoogleAuthProvider());
+  }catch(e){ showToastCmt("Sign-in failed: " + e.message, "error"); }
+});
+
+$("cmtLogoutBtn").addEventListener("click", ()=> signOut(auth));
+
+onAuthStateChanged(auth, async user=>{
+  currentUser = user;
+
+  if(user){
+    // fill header avatar
+    const avEl = makeAv(user.photoURL, user.displayName||"", 32);
+    const avWrap = $("cmtAvWrap");
+    if(avWrap){ avWrap.innerHTML=""; avWrap.appendChild(avEl); }
+
+    // fill form avatar
+    const fav = $("cmtFormAvWrap");
+    if(fav){ fav.innerHTML=""; fav.appendChild(makeAv(user.photoURL, user.displayName||"", 38)); }
+
+    $("cmtLoginBox").style.display = "none";
+    $("cmtUserBar").style.display  = "flex";
+    $("cmtUsername").textContent   = user.displayName || user.email;
+
+    // load my likes
+    await loadMyLikes();
+
+    // show form only if user has no comment yet
+    const snap = await getDoc(doc(db, "comments", user.uid));
+    $("cmtFormWrap").style.display = snap.exists() ? "none" : "block";
+
+  } else {
+    $("cmtLoginBox").style.display = "flex";
+    $("cmtUserBar").style.display  = "none";
+    $("cmtFormWrap").style.display = "none";
+    myLikes.clear();
+  }
+  renderComments();
+});
+
+// ─── likes ──────────────────────────────────────────────────
+async function loadMyLikes(){
+  if(!currentUser) return;
+  myLikes.clear();
+  try{
+    const snap = await getDocs(
+      query(collection(db,"likes"), orderBy("ts","desc"))
+    );
+    snap.forEach(d=>{
+      if(d.data().likerUid === currentUser.uid)
+        myLikes.add(d.data().commentUid);
+    });
+  }catch(e){ console.warn("likes load:", e); }
+}
+
+async function toggleLike(commentUid, likeBtn, countEl){
+  if(!currentUser){
+    showToastCmt("Sign in to like comments", "info");
+    return;
+  }
+  const likeId  = currentUser.uid + "_" + commentUid;
+  const likeRef = doc(db, "likes", likeId);
+  const liked   = myLikes.has(commentUid);
+
+  // optimistic update
+  if(liked){
+    myLikes.delete(commentUid);
+    const cur = parseInt(countEl.textContent)||0;
+    countEl.textContent = Math.max(0, cur-1);
+    likeBtn.classList.remove("liked");
+    try{ await deleteDoc(likeRef); }catch(e){ myLikes.add(commentUid); loadComments(); }
+  } else {
+    myLikes.add(commentUid);
+    const cur = parseInt(countEl.textContent)||0;
+    countEl.textContent = cur+1;
+    likeBtn.classList.add("liked");
+    try{
+      await setDoc(likeRef,{ likerUid: currentUser.uid, commentUid, ts: Date.now() });
+    }catch(e){ myLikes.delete(commentUid); loadComments(); }
+  }
+}
+
+// ─── form: textarea ─────────────────────────────────────────
+const textarea  = $("cmtTextarea");
+const charCount = $("cmtCharCount");
+textarea.addEventListener("input",()=>{
+  charCount.textContent = textarea.value.length + " / 500";
+  $("cmtSubmitBtn").disabled = textarea.value.trim().length === 0;
+});
+
+// ─── form: submit ───────────────────────────────────────────
+$("cmtSubmitBtn").addEventListener("click", async()=>{
+  if(!currentUser) return;
+  const text = textarea.value.trim();
+  if(!text) return;
+  $("cmtSubmitBtn").disabled = true;
+  $("cmtSubmitBtn").textContent = "Posting…";
+  try{
+    await setDoc(doc(db,"comments", currentUser.uid),{
+      uid:   currentUser.uid,
+      name:  currentUser.displayName || "Anonymous",
+      photo: currentUser.photoURL    || "",
+      text,
+      ts:     Date.now(),
+      edited: false
+    });
+    $("cmtFormWrap").style.display = "none";
+    textarea.value = ""; charCount.textContent = "0 / 500";
+    showToastCmt("Review posted!", "success");
+    loadComments();
+  }catch(e){
+    showToastCmt("Failed: " + e.message, "error");
+    $("cmtSubmitBtn").disabled = false;
+    $("cmtSubmitBtn").textContent = "Post";
+  }
+});
+
+// ─── load ───────────────────────────────────────────────────
+async function loadComments(){
+  $("cmtLoading").style.display = "flex";
+  try{
+    // load likes count per comment
+    const likesSnap = await getDocs(collection(db,"likes"));
+    const likeCounts = {};
+    likesSnap.forEach(d=>{ const uid=d.data().commentUid; likeCounts[uid]=(likeCounts[uid]||0)+1; });
+
+    const snap = await getDocs(query(collection(db,"comments"), orderBy("ts","desc")));
+    allComments = [];
+    snap.forEach(d=> allComments.push({ id:d.id, likes: likeCounts[d.id]||0, ...d.data() }));
+  }catch(e){ console.warn("load comments:", e); }
+  renderComments();
+}
+
+// ─── render ─────────────────────────────────────────────────
+function renderComments(){
+  const list    = $("cmtList");
+  const loading = $("cmtLoading");
+  if(loading) loading.style.display = "none";
+
+  // remove old cards
+  list.querySelectorAll(".cmt-card,.cmt-empty").forEach(el=>el.remove());
+
+  // count
+  const cnt = $("commentsCount");
+  if(cnt) cnt.textContent = allComments.length + (allComments.length===1?" review":" reviews");
+
+  if(allComments.length===0){
+    const empty = document.createElement("div");
+    empty.className = "cmt-empty";
+    empty.innerHTML = '<div class="cmt-empty-icon">💬</div><p>No reviews yet. Be the first!</p>';
+    list.appendChild(empty);
+    return;
+  }
+
+  allComments.forEach(c=>{
+    const isMine   = currentUser && currentUser.uid === c.uid;
+    const likedByMe= myLikes.has(c.uid);
+
+    // ── card wrapper ──
+    const card = document.createElement("div");
+    card.className = "cmt-card" + (isMine?" is-mine":"");
+
+    // ── left: content ──
+    const content = document.createElement("div");
+    content.className = "cmt-card-content";
+
+    // top: avatar + name + date
+    const top = document.createElement("div");
+    top.className = "cmt-card-top";
+    const av = makeAv(c.photo, c.name, 36);
+    const nameRow = document.createElement("div");
+    nameRow.className = "cmt-card-name-row";
+    nameRow.innerHTML =
+      '<div class="cmt-card-name">' + escHtml(c.name||"Anonymous") + '</div>' +
+      '<div class="cmt-card-meta">' +
+        fmtDate(c.ts) +
+        (c.edited ? '<span class="cmt-edited-tag">· edited</span>' : '') +
+        (isMine   ? '<span class="cmt-mine-badge">Your review</span>' : '') +
+      '</div>';
+    top.appendChild(av);
+    top.appendChild(nameRow);
+    content.appendChild(top);
+
+    // comment text
+    const txt = document.createElement("p");
+    txt.className = "cmt-card-text";
+    txt.textContent = c.text || "";
+    content.appendChild(txt);
+
+    // edit button (only mine)
+    if(isMine){
+      const acts = document.createElement("div");
+      acts.className = "cmt-card-actions";
+      const editBtn = document.createElement("button");
+      editBtn.className = "cmt-edit-btn"; editBtn.type="button"; editBtn.textContent="Edit";
+      editBtn.addEventListener("click",()=> openEdit(card, content, c));
+      acts.appendChild(editBtn);
+      content.appendChild(acts);
+    }
+
+    card.appendChild(content);
+
+    // ── right: like col ──
+    const likeCol = document.createElement("div");
+    likeCol.className = "cmt-like-col";
+
+    const likeBtn = document.createElement("button");
+    likeBtn.className  = "cmt-like-btn" + (likedByMe?" liked":"") + (!currentUser?" locked":"");
+    likeBtn.type       = "button";
+    likeBtn.title      = currentUser ? (likedByMe?"Unlike":"Like") : "Sign in to like";
+    likeBtn.innerHTML  =
+      '<svg viewBox="0 0 24 24" fill="' + (likedByMe?"var(--red)":"none") + '" stroke="' + (likedByMe?"var(--red)":"currentColor") + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+        '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>' +
+      '</svg>';
+
+    const likeCount = document.createElement("span");
+    likeCount.className = "cmt-like-count";
+    likeCount.textContent = c.likes || 0;
+
+    if(currentUser && !isMine){
+      likeBtn.addEventListener("click",()=> toggleLike(c.uid, likeBtn, likeCount));
+    }
+
+    likeCol.appendChild(likeBtn);
+    likeCol.appendChild(likeCount);
+    card.appendChild(likeCol);
+
+    list.appendChild(card);
+  });
+}
+
+// ─── edit inline ────────────────────────────────────────────
+function openEdit(card, content, c){
+  const existing = card.querySelector(".cmt-edit-wrap");
+  if(existing){ existing.remove(); return; }
+
+  const wrap = document.createElement("div");
+  wrap.className = "cmt-edit-wrap";
+
+  const ta = document.createElement("textarea");
+  ta.className  = "cmt-edit-area";
+  ta.value      = c.text;
+  ta.rows       = 3;
+  ta.maxLength  = 500;
+
+  const acts = document.createElement("div");
+  acts.className = "cmt-edit-actions";
+
+  const cancelBtn = document.createElement("button");
+  cancelBtn.className   = "cmt-cancel-btn"; cancelBtn.type="button"; cancelBtn.textContent="Cancel";
+  cancelBtn.addEventListener("click",()=> wrap.remove());
+
+  const saveBtn = document.createElement("button");
+  saveBtn.className   = "cmt-save-btn"; saveBtn.type="button"; saveBtn.textContent="Save";
+  saveBtn.addEventListener("click", async()=>{
+    const newText = ta.value.trim();
+    if(!newText){ showToastCmt("Comment can't be empty","error"); return; }
+    saveBtn.disabled=true; saveBtn.textContent="Saving…";
+    try{
+      await setDoc(doc(db,"comments",c.uid),{...c, text:newText, edited:true, editedTs:Date.now()});
+      showToastCmt("Updated!","success");
+      wrap.remove();
+      loadComments();
+    }catch(e){
+      showToastCmt("Failed: "+e.message,"error");
+      saveBtn.disabled=false; saveBtn.textContent="Save";
+    }
+  });
+
+  acts.appendChild(cancelBtn);
+  acts.appendChild(saveBtn);
+  wrap.appendChild(ta);
+  wrap.appendChild(acts);
+  content.appendChild(wrap);
+  ta.focus();
+}
+
+// ─── kick off ───────────────────────────────────────────────
+loadComments();
 </script>
 </body>
 </html>
