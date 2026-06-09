@@ -390,16 +390,21 @@
     .pbspeed-chip{padding:7px 8px;flex:1 1 0;min-width:0;box-sizing:border-box;justify-content:space-between;overflow:hidden}
     .pbspeed-chip .val{font-size:clamp(8px,2.8vw,13px);overflow:hidden;text-overflow:ellipsis;min-width:0;flex-shrink:1}
     .pbspeed-chip .copy-btn{font-size:13px;flex-shrink:0}
-    /* history table mobile — scroll horizontally */
+    /* history table mobile — title takes the most room; playback + date trimmed */
     .table-scroll{-webkit-overflow-scrolling:touch}
-    table{min-width:520px;width:100%;table-layout:fixed;border-collapse:collapse}
+    table{min-width:410px;width:100%;table-layout:fixed;border-collapse:collapse}
     thead th{padding:0 5px 10px;font-size:9px;letter-spacing:.3px}
     tbody td{padding:7px 5px;font-size:11px;white-space:nowrap}
-    table th:nth-child(1),table td:nth-child(1){width:18px}
-    table th:nth-child(2),table td:nth-child(2){width:130px}
-    table th:nth-child(3),table td:nth-child(3){width:160px}
-    table th:nth-child(4),table td:nth-child(4){width:88px}
-    table th:nth-child(5),table td:nth-child(5){width:28px}
+    table th:nth-child(1),table td:nth-child(1){width:16px}
+    /* col 2 = Title: no fixed width so it absorbs all leftover space */
+    table th:nth-child(2),table td:nth-child(2){width:auto}
+    table th:nth-child(3),table td:nth-child(3){width:138px}
+    table th:nth-child(4),table td:nth-child(4){width:58px}
+    table th:nth-child(5),table td:nth-child(5){width:24px}
+    /* compact playback + date so the narrower columns still fit */
+    td:nth-child(3) .hist-pbspeed-val{font-size:10px}
+    td:nth-child(3) .hist-pbspeed-copy{font-size:12px}
+    td.t-date{font-size:10px;overflow:hidden;text-overflow:ellipsis}
     td .t-title{white-space:normal;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
     .hist-pbspeed-val{font-size:10px}
     .hist-pbspeed-copy{font-size:12px}
@@ -410,7 +415,7 @@
   .hdr-right{display:flex;flex-direction:column;align-items:stretch;gap:6px}
   .hdr-login-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#fff;color:#222;border:none;border-radius:8px;padding:7px 13px;font-family:'Inter',sans-serif;font-weight:700;font-size:11px;cursor:pointer;transition:box-shadow .2s,transform .15s;box-shadow:0 2px 7px rgba(0,0,0,.18);width:100%;white-space:nowrap}
   .hdr-login-btn:hover{box-shadow:0 3px 14px rgba(0,0,0,.26);transform:translateY(-1px)}
-  .hdr-top-row{display:flex;align-items:center;gap:8px;width:100%}
+  .hdr-top-row{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}
   #headerAuthArea{display:flex;width:100%}
   .hdr-login-btn{width:100%;justify-content:center}
   .logo{cursor:pointer}
@@ -38109,7 +38114,7 @@ run();
   var I18N={
     en:{
       step1:"Upload audio", step2:"Encoder process", step3:"Download OGG",
-      heroFor:"Bypass Audio Roblox Kamu",
+      heroFor:"Bypass Your Roblox Audio",
       heroP:'Upload your audio — the system speeds it up and applies the preset gain, then you download a properly edited <b>.ogg</b> file.',
       presetActive:"Active Preset", dropTitle:"Upload Audio File",
       dropSub:"Click or drag a file here — mp3, wav, m4a, or ogg",
