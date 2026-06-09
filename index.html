@@ -390,25 +390,27 @@
     .pbspeed-chip{padding:7px 8px;flex:1 1 0;min-width:0;box-sizing:border-box;justify-content:space-between;overflow:hidden}
     .pbspeed-chip .val{font-size:clamp(8px,2.8vw,13px);overflow:hidden;text-overflow:ellipsis;min-width:0;flex-shrink:1}
     .pbspeed-chip .copy-btn{font-size:13px;flex-shrink:0}
-    /* history table mobile — title takes the most room; playback + date trimmed */
+    /* history table mobile — wider scroll frame so nothing is cut off */
     .table-scroll{-webkit-overflow-scrolling:touch}
-    table{min-width:410px;width:100%;table-layout:fixed;border-collapse:collapse}
+    table{min-width:500px;width:100%;table-layout:fixed;border-collapse:collapse}
     thead th{padding:0 5px 10px;font-size:9px;letter-spacing:.3px}
-    tbody td{padding:7px 5px;font-size:11px;white-space:nowrap}
-    table th:nth-child(1),table td:nth-child(1){width:16px}
+    tbody td{padding:7px 6px;font-size:11px;white-space:nowrap}
+    table th:nth-child(1),table td:nth-child(1){width:18px}
     /* col 2 = Title: no fixed width so it absorbs all leftover space */
     table th:nth-child(2),table td:nth-child(2){width:auto}
-    table th:nth-child(3),table td:nth-child(3){width:138px}
-    table th:nth-child(4),table td:nth-child(4){width:58px}
-    table th:nth-child(5),table td:nth-child(5){width:24px}
-    /* compact playback + date so the narrower columns still fit */
-    td:nth-child(3) .hist-pbspeed-val{font-size:10px}
-    td:nth-child(3) .hist-pbspeed-copy{font-size:12px}
-    td.t-date{font-size:10px;overflow:hidden;text-overflow:ellipsis}
+    table th:nth-child(3),table td:nth-child(3){width:160px}
+    table th:nth-child(4),table td:nth-child(4){width:96px}
+    table th:nth-child(5),table td:nth-child(5){width:26px}
+    /* date shown in full (no clipping / ellipsis) */
+    td.t-date{font-size:11px;overflow:visible;text-overflow:clip}
     td .t-title{white-space:normal;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
-    .hist-pbspeed-val{font-size:10px}
-    .hist-pbspeed-copy{font-size:12px}
+    .hist-pbspeed-val{font-size:11px}
+    .hist-pbspeed-copy{font-size:13px}
     td.del-cell{padding:7px 4px;text-align:center}
+    /* keep "0 reviews" on the same line, right next to the heading */
+    .cmt-title-line{flex-wrap:nowrap;gap:7px;align-items:center}
+    .comments-heading{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex-shrink:1}
+    .comments-count{flex-shrink:0;white-space:nowrap;padding:3px 11px}
   }
   /* ===== header controls + tutorial button ===== */
   .header-controls{display:flex;align-items:flex-end;gap:0}
@@ -416,7 +418,7 @@
   .hdr-login-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#fff;color:#222;border:none;border-radius:8px;padding:7px 13px;font-family:'Inter',sans-serif;font-weight:700;font-size:11px;cursor:pointer;transition:box-shadow .2s,transform .15s;box-shadow:0 2px 7px rgba(0,0,0,.18);width:100%;white-space:nowrap}
   .hdr-login-btn:hover{box-shadow:0 3px 14px rgba(0,0,0,.26);transform:translateY(-1px)}
   .hdr-top-row{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}
-  #headerAuthArea{display:flex;width:100%}
+  #headerAuthArea{display:flex;width:100%;justify-content:flex-end}
   .hdr-login-btn{width:100%;justify-content:center}
   .logo{cursor:pointer}
   .tutorial-btn{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);color:var(--white);font-family:inherit;font-size:12px;font-weight:700;padding:8px 16px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s,background .2s,box-shadow .2s;white-space:nowrap}
