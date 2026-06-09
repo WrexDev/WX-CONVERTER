@@ -175,6 +175,10 @@
   #historySection.show{display:block;animation:slideUp .5s cubic-bezier(.2,.8,.2,1)}
   .hist-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
   .table-scroll{overflow-x:auto}
+  .table-scroll::-webkit-scrollbar{height:3px}
+  .table-scroll::-webkit-scrollbar-track{background:transparent}
+  .table-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:999px}
+  .table-scroll{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.08) transparent}
   table{width:100%;border-collapse:collapse;font-size:12px;min-width:440px}
   thead th{text-align:left;color:var(--muted);font-weight:500;text-transform:uppercase;font-size:10px;letter-spacing:1px;padding:0 12px 12px;border-bottom:1px solid var(--line)}
   tbody td{padding:10px 8px;border-bottom:1px solid var(--line-soft);vertical-align:middle;white-space:nowrap}
@@ -194,7 +198,7 @@
   .badge-popup .bp-title{font-weight:700;font-size:12px;margin-bottom:5px;display:flex;align-items:center;gap:6px}
   .btn-clear{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:8px 14px;font-family:'Inter',sans-serif;font-size:11px;cursor:pointer;transition:all .2s}
   .btn-clear:hover{border-color:var(--red);color:var(--red)}
-  .btn-del{background:transparent;border:none;cursor:pointer;padding:5px;border-radius:8px;line-height:1;font-size:15px;transition:background .2s,transform .15s;color:unset}
+  .btn-del{background:transparent;border:none;cursor:pointer;padding:5px 7px;border-radius:8px;line-height:1;transition:background .2s,transform .15s;color:var(--red)}
   .btn-del .em-white{font-size:15px}
   .btn-del:hover{background:rgba(255,59,59,.14);transform:scale(1.1)}
   td.del-cell{text-align:right;white-space:nowrap}
@@ -377,23 +381,29 @@
     .btn{width:100%}
     #toasts{left:14px;right:14px;bottom:14px}
     .toast{max-width:none;min-width:0}
-    /* chips-row: stack vertically on mobile, ultra-compact */
-    .chips-row{flex-wrap:wrap;gap:4px}
-    .ok-badge,.demo-badge{font-size:9px;padding:6px 8px;flex:1 1 auto}
-    .info-chip{padding:6px 8px;flex:1 1 auto}
-    .info-chip .lab{font-size:8px;letter-spacing:0}
-    .info-chip .val{font-size:12px}
-    .pbspeed-chip{padding:6px 8px;flex:1 1 100%}
-    .pbspeed-chip .val{font-size:11px}
-    .pbspeed-chip .copy-btn{font-size:12px}
-    /* history table mobile */
-    table{min-width:0;width:100%}
-    thead th{padding:0 6px 10px;font-size:9px;letter-spacing:.3px}
-    tbody td{padding:8px 6px;font-size:11px}
-    td .t-title{max-width:140px;-webkit-line-clamp:2;white-space:normal}
+    /* chips-row: row 1 = ok-badge full, row 2 = info-chip + pbspeed-chip side by side */
+    .chips-row{flex-direction:row;flex-wrap:wrap;gap:5px}
+    .ok-badge,.demo-badge{font-size:10px;padding:7px 10px;flex:1 1 100%;width:100%;box-sizing:border-box;justify-content:center}
+    .info-chip{padding:7px 8px;flex:1 1 0;min-width:0;box-sizing:border-box;justify-content:space-between;overflow:hidden}
+    .info-chip .lab{font-size:clamp(7px,2.2vw,10px);letter-spacing:0;overflow:hidden;text-overflow:ellipsis;min-width:0;flex-shrink:1}
+    .info-chip .val{font-size:clamp(10px,3.5vw,14px);flex-shrink:0}
+    .pbspeed-chip{padding:7px 8px;flex:1 1 0;min-width:0;box-sizing:border-box;justify-content:space-between;overflow:hidden}
+    .pbspeed-chip .val{font-size:clamp(8px,2.8vw,13px);overflow:hidden;text-overflow:ellipsis;min-width:0;flex-shrink:1}
+    .pbspeed-chip .copy-btn{font-size:13px;flex-shrink:0}
+    /* history table mobile — scroll horizontally */
+    .table-scroll{-webkit-overflow-scrolling:touch}
+    table{min-width:520px;width:100%;table-layout:fixed;border-collapse:collapse}
+    thead th{padding:0 5px 10px;font-size:9px;letter-spacing:.3px}
+    tbody td{padding:7px 5px;font-size:11px;white-space:nowrap}
+    table th:nth-child(1),table td:nth-child(1){width:18px}
+    table th:nth-child(2),table td:nth-child(2){width:130px}
+    table th:nth-child(3),table td:nth-child(3){width:160px}
+    table th:nth-child(4),table td:nth-child(4){width:88px}
+    table th:nth-child(5),table td:nth-child(5){width:28px}
+    td .t-title{white-space:normal;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
     .hist-pbspeed-val{font-size:10px}
     .hist-pbspeed-copy{font-size:12px}
-    td.del-cell{padding:8px 4px}
+    td.del-cell{padding:7px 4px;text-align:center}
   }
   /* ===== header controls + tutorial button ===== */
   .header-controls{display:flex;align-items:flex-end;gap:0}
@@ -38509,7 +38519,7 @@ run();
       var tip=tr("tip",{s:sp,r:normalSpeedFor(sp)}).replace(/<\/?b>/g,"");
       var pbLabel="PlaybackSpeed = <span style=\'color:"+nsColor+";font-weight:800\'>"+escapeHtml(ns)+"</span>,";
       var copyVal="PlaybackSpeed = "+ns+",";
-      return "<tr><td>"+(i+1)+"</td><td><div class='t-title' title='"+t+"'>"+t+"</div></td>"+
+      return "<tr><td>"+(i+1)+"</td><td><div class='t-title' title='"+t+"'>"+ t+"</div></td>"+
              "<td>"+
                "<span class='hist-pbspeed-chip'>"+
                  "<span class='hist-pbspeed-val'>"+pbLabel+"</span>"+
@@ -38518,7 +38528,7 @@ run();
                "</span>"+
              "</td>"+
              "<td class='t-date'>"+ds+"</td>"+
-             "<td class='del-cell'><button class='btn-del' type='button' data-del='"+i+"' title='"+escapeHtml(tr("deleteTitle"))+"' aria-label='"+escapeHtml(tr("deleteTitle"))+"'>🗑️</button></td></tr>";
+             "<td class='del-cell'><button class='btn-del' type='button' data-del='"+i+"' title='"+escapeHtml(tr("deleteTitle"))+"' aria-label='"+escapeHtml(tr("deleteTitle"))+"'><span style='color:var(--red);font-weight:900;font-size:14px;line-height:1'>&#x2715;</span></button></td></tr>";
     }).join("");
   }
 
