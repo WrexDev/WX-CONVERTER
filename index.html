@@ -185,39 +185,41 @@
   footer{text-align:center;margin-top:50px;padding-top:28px;border-top:1px solid var(--line-soft);color:var(--muted-2);font-size:11px;letter-spacing:1px}
 
   /* ===== COMMENTS SECTION ===== */
-  #commentsSection{width:100%;background:var(--bg-soft);border-top:1px solid var(--line);padding:56px 0 80px}
-  .comments-inner{max-width:1280px;margin:0 auto;padding:0 48px}
-  @media(max-width:900px){.comments-inner{padding:0 24px}}
-  @media(max-width:600px){.comments-inner{padding:0 14px}}
-
-  /* header */
-  .comments-header{margin-bottom:28px}
-  .comments-title-row{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap}
-  .comments-dot{width:8px;height:8px;background:var(--red);border-radius:2px;box-shadow:0 0 8px var(--red);flex-shrink:0}
-  .comments-heading{font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(18px,2.8vw,26px);line-height:1}
+  #commentsSection{background:#13131e;border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin-top:22px}
+  .comments-top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+  .comments-title-block{}
+  .comments-title-row{display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+  .comments-dot{width:7px;height:7px;background:var(--red);border-radius:2px;box-shadow:0 0 8px var(--red);flex-shrink:0}
+  .comments-heading{font-family:'Inter',sans-serif;font-weight:800;font-size:18px;line-height:1}
   .comments-count{font-size:11px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
-  .comments-sub{font-size:12px;color:var(--muted);margin-left:20px}
+  .comments-sub{font-size:12px;color:var(--muted);margin-left:17px}
 
-  /* topbar */
-  .cmt-topbar{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
-  .cmt-login-box{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  /* auth card — right side */
+  .cmt-auth-card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 14px;display:flex;align-items:center;gap:12px;flex-shrink:0;flex-wrap:wrap}
+  .cmt-login-box{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .cmt-login-hint{font-size:12px;color:var(--muted)}
   .cmt-google-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#222;border:none;border-radius:9px;padding:8px 16px;font-family:'Inter',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:box-shadow .2s,transform .15s;box-shadow:0 2px 8px rgba(0,0,0,.18);white-space:nowrap}
   .cmt-google-btn:hover{box-shadow:0 4px 16px rgba(0,0,0,.26);transform:translateY(-1px)}
-  .cmt-user-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:9px 14px}
+  .cmt-user-bar{display:flex;align-items:center;gap:10px}
   .cmt-user-info{display:flex;align-items:center;gap:9px}
   .cmt-username{font-size:13px;font-weight:600;color:var(--white)}
-  .cmt-logout-btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:7px;padding:5px 13px;font-family:inherit;font-size:11px;cursor:pointer;transition:all .2s}
-  .cmt-logout-btn:hover{border-color:var(--red);color:var(--red)}
+  .cmt-logout-btn{background:var(--red);border:none;color:#fff;border-radius:7px;padding:6px 14px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;transition:background .2s,transform .15s;white-space:nowrap}
+  .cmt-logout-btn:hover{background:var(--red-dim);transform:translateY(-1px)}
 
-  /* avatar circle helper */
+  /* avatar */
   .cmt-av-wrap{position:relative;flex-shrink:0}
   .cmt-av-wrap img{border-radius:50%;display:block;border:2px solid var(--line)}
   .cmt-av-letter{display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-dim));color:#fff;font-family:'Inter',sans-serif;font-weight:800;border:2px solid var(--line)}
 
+  /* star rating row in form */
+  .cmt-form-stars{display:flex;align-items:center;gap:3px;margin-bottom:10px}
+  .cmt-fstar{font-size:24px;color:var(--muted-2);cursor:pointer;transition:color .15s,transform .1s;user-select:none;line-height:1}
+  .cmt-fstar:hover,.cmt-fstar.on{color:#ffb13b;transform:scale(1.15)}
+  .cmt-fstar-hint{font-size:11px;color:var(--muted);margin-left:6px}
+
   /* write-form */
-  .cmt-form-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:24px;animation:slideUp .4s cubic-bezier(.2,.8,.2,1)}
-  .cmt-form-inner{display:flex;gap:14px;align-items:flex-start}
+  .cmt-form-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:20px;animation:slideUp .4s cubic-bezier(.2,.8,.2,1)}
+  .cmt-form-inner{display:flex;gap:12px;align-items:flex-start}
   .cmt-form-body{flex:1;min-width:0}
   .cmt-textarea{width:100%;background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--white);font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;resize:vertical;min-height:80px;transition:border-color .2s,box-shadow .2s}
   .cmt-textarea::placeholder{color:var(--muted-2)}
@@ -228,25 +230,24 @@
   .cmt-submit-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 22px rgba(255,59,59,.35)}
   .cmt-submit-btn:disabled{opacity:.45;cursor:not-allowed}
 
-  /* grid of cards */
-  .cmt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  /* grid */
+  .cmt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
   @media(max-width:600px){.cmt-grid{grid-template-columns:1fr}}
-  .cmt-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;padding:48px;color:var(--muted);font-size:13px}
+  .cmt-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;padding:40px;color:var(--muted);font-size:13px}
   .cmt-spinner{width:18px;height:18px;border:2px solid var(--line);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite}
-  .cmt-empty{grid-column:1/-1;text-align:center;padding:52px 20px;color:var(--muted);font-size:13px}
-  .cmt-empty-icon{font-size:34px;margin-bottom:10px;opacity:.45}
+  .cmt-empty{grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--muted);font-size:13px}
+  .cmt-empty-icon{font-size:32px;margin-bottom:10px;opacity:.45}
 
-  /* individual card — left content + right like button */
-  .cmt-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;transition:border-color .25s,box-shadow .25s;display:flex;gap:14px;position:relative;align-items:flex-start}
-  .cmt-card:hover{border-color:var(--red-dim);box-shadow:0 0 22px var(--red-glow)}
+  /* card */
+  .cmt-card{background:#1a1a27;border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;transition:border-color .25s,box-shadow .25s;display:flex;gap:12px;align-items:flex-start}
+  .cmt-card:hover{border-color:var(--red-dim);box-shadow:0 0 20px var(--red-glow)}
   .cmt-card.is-mine{border-color:rgba(255,59,59,.3)}
-
-  /* left: content */
-  .cmt-card-content{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+  .cmt-card-content{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
   .cmt-card-top{display:flex;align-items:center;gap:9px}
-  .cmt-card-name-row{display:flex;flex-direction:column;gap:1px;min-width:0}
+  .cmt-card-name-row{display:flex;flex-direction:column;gap:2px;min-width:0}
   .cmt-card-name{font-weight:700;font-size:13px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .cmt-card-meta{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .cmt-card-meta{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+  .cmt-card-stars{font-size:13px;letter-spacing:1px}
   .cmt-mine-badge{font-size:10px;color:var(--red);border:1px solid rgba(255,59,59,.3);background:rgba(255,59,59,.07);border-radius:999px;padding:1px 7px}
   .cmt-edited-tag{font-size:10px;color:var(--muted-2);font-style:italic}
   .cmt-card-text{font-size:13px;color:var(--white);line-height:1.65;word-break:break-word;white-space:pre-wrap;margin:0}
@@ -254,21 +255,25 @@
   .cmt-edit-btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:3px 10px;font-family:inherit;font-size:11px;cursor:pointer;transition:all .2s}
   .cmt-edit-btn:hover{border-color:var(--red);color:var(--red)}
 
-  /* right: like button */
+  /* like col */
   .cmt-like-col{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;padding-top:2px}
-  .cmt-like-btn{background:transparent;border:1.5px solid var(--line);border-radius:10px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;color:var(--muted)}
-  .cmt-like-btn svg{width:17px;height:17px;transition:fill .2s,stroke .2s}
+  .cmt-like-btn{background:transparent;border:1.5px solid var(--line);border-radius:10px;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;color:var(--muted)}
+  .cmt-like-btn svg{width:16px;height:16px;transition:fill .15s,stroke .15s}
   .cmt-like-btn:hover:not(.liked):not(.locked){border-color:var(--red);color:var(--red);transform:scale(1.08)}
-  .cmt-like-btn.liked{border-color:var(--red);background:rgba(255,59,59,.12);color:var(--red)}
+  .cmt-like-btn.liked{border-color:var(--red);background:var(--red);color:#fff}
+  .cmt-like-btn.liked svg{fill:#fff;stroke:#fff}
   .cmt-like-btn.locked{opacity:.4;cursor:default}
   .cmt-like-count{font-size:12px;font-weight:700;color:var(--muted);line-height:1}
-  .cmt-like-btn.liked + .cmt-like-count{color:var(--red)}
+  .cmt-like-btn.liked+.cmt-like-count{color:var(--red)}
 
   /* edit inline */
   .cmt-edit-wrap{display:flex;flex-direction:column;gap:8px;margin-top:6px;border-top:1px solid var(--line);padding-top:10px}
   .cmt-edit-area{width:100%;background:var(--bg-soft);border:1px solid var(--red);border-radius:8px;padding:10px 12px;color:var(--white);font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;resize:vertical;min-height:68px}
   .cmt-edit-area:focus{outline:none;box-shadow:0 0 0 2px rgba(255,59,59,.15)}
   .cmt-edit-actions{display:flex;gap:8px;justify-content:flex-end}
+  .cmt-edit-stars{display:flex;gap:3px;margin-bottom:6px}
+  .cmt-estar{font-size:20px;color:var(--muted-2);cursor:pointer;transition:color .15s;user-select:none}
+  .cmt-estar.on{color:#ffb13b}
   .cmt-save-btn{background:var(--red);color:#fff;border:none;border-radius:7px;padding:6px 15px;font-family:inherit;font-weight:700;font-size:12px;cursor:pointer;transition:background .2s}
   .cmt-save-btn:hover{background:var(--red-dim)}
   .cmt-cancel-btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:7px;padding:6px 13px;font-family:inherit;font-size:12px;cursor:pointer;transition:all .2s}
@@ -538,13 +543,7 @@
     </div>
   </div><!-- /#tutorialPage -->
 
-  <footer class="reveal" style="animation-delay:.3s">
-    Free &amp; Open · Client-Side Only
-  </footer>
-</div>
-
-<!-- ===== COMMENTS SECTION (full-width, outside .wrap) ===== -->
-<section id="commentsSection">
+  <section id="commentsSection">
   <div class="comments-inner">
 
     <!-- Header -->
@@ -599,8 +598,12 @@
       </div>
     </div>
 
-  </div>
-</section>
+  </section>
+
+  <footer class="reveal" style="animation-delay:.3s">
+    Free &amp; Open · Client-Side Only
+  </footer>
+</div>
 
 <div id="toasts"></div>
 
@@ -38657,19 +38660,43 @@ async function toggleLike(commentUid, likeBtn, countEl){
   }
 }
 
+// ─── form: star rating ──────────────────────────────────────
+let formRating = 0;
+const fstarHints = ["","Poor","Fair","Good","Great","Excellent!"];
+document.querySelectorAll(".cmt-fstar").forEach(s=>{
+  s.addEventListener("mouseenter",()=>{
+    const v=+s.dataset.v;
+    document.querySelectorAll(".cmt-fstar").forEach(x=>x.classList.toggle("on",+x.dataset.v<=v));
+    $("cmtFstarHint").textContent = fstarHints[v];
+  });
+  s.addEventListener("mouseleave",()=>{
+    document.querySelectorAll(".cmt-fstar").forEach(x=>x.classList.toggle("on",+x.dataset.v<=formRating));
+    $("cmtFstarHint").textContent = formRating ? fstarHints[formRating] : "Select a rating first";
+  });
+  s.addEventListener("click",()=>{
+    formRating = +s.dataset.v;
+    document.querySelectorAll(".cmt-fstar").forEach(x=>x.classList.toggle("on",+x.dataset.v<=formRating));
+    $("cmtFstarHint").textContent = fstarHints[formRating];
+    checkSubmit();
+  });
+});
+
 // ─── form: textarea ─────────────────────────────────────────
 const textarea  = $("cmtTextarea");
 const charCount = $("cmtCharCount");
 textarea.addEventListener("input",()=>{
   charCount.textContent = textarea.value.length + " / 500";
-  $("cmtSubmitBtn").disabled = textarea.value.trim().length === 0;
+  checkSubmit();
 });
+function checkSubmit(){
+  $("cmtSubmitBtn").disabled = !(formRating > 0 && textarea.value.trim().length > 0);
+}
 
 // ─── form: submit ───────────────────────────────────────────
 $("cmtSubmitBtn").addEventListener("click", async()=>{
   if(!currentUser) return;
   const text = textarea.value.trim();
-  if(!text) return;
+  if(!text || !formRating) return;
   $("cmtSubmitBtn").disabled = true;
   $("cmtSubmitBtn").textContent = "Posting…";
   try{
@@ -38678,11 +38705,14 @@ $("cmtSubmitBtn").addEventListener("click", async()=>{
       name:  currentUser.displayName || "Anonymous",
       photo: currentUser.photoURL    || "",
       text,
+      rating: formRating,
       ts:     Date.now(),
       edited: false
     });
     $("cmtFormWrap").style.display = "none";
     textarea.value = ""; charCount.textContent = "0 / 500";
+    formRating = 0;
+    document.querySelectorAll(".cmt-fstar").forEach(x=>x.classList.remove("on"));
     showToastCmt("Review posted!", "success");
     loadComments();
   }catch(e){
@@ -38747,13 +38777,19 @@ function renderComments(){
     const av = makeAv(c.photo, c.name, 36);
     const nameRow = document.createElement("div");
     nameRow.className = "cmt-card-name-row";
+    // build star display
+    const ratingVal = c.rating||0;
+    let starsDisp = "";
+    for(let si=1;si<=5;si++) starsDisp += '<span style="color:'+(si<=ratingVal?'#ffb13b':'#2a2a3a')+'">★</span>';
+
     nameRow.innerHTML =
       '<div class="cmt-card-name">' + escHtml(c.name||"Anonymous") + '</div>' +
       '<div class="cmt-card-meta">' +
         fmtDate(c.ts) +
         (c.edited ? '<span class="cmt-edited-tag">· edited</span>' : '') +
         (isMine   ? '<span class="cmt-mine-badge">Your review</span>' : '') +
-      '</div>';
+      '</div>' +
+      '<div class="cmt-card-stars">' + starsDisp + '</div>';
     top.appendChild(av);
     top.appendChild(nameRow);
     content.appendChild(top);
@@ -38785,8 +38821,8 @@ function renderComments(){
     likeBtn.className  = "cmt-like-btn" + (likedByMe?" liked":"") + (!currentUser?" locked":"");
     likeBtn.type       = "button";
     likeBtn.title      = currentUser ? (likedByMe?"Unlike":"Like") : "Sign in to like";
-    likeBtn.innerHTML  =
-      '<svg viewBox="0 0 24 24" fill="' + (likedByMe?"var(--red)":"none") + '" stroke="' + (likedByMe?"var(--red)":"currentColor") + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+    likeBtn.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="'+(likedByMe?"#fff":"none")+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
         '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>' +
       '</svg>';
 
@@ -38811,8 +38847,24 @@ function openEdit(card, content, c){
   const existing = card.querySelector(".cmt-edit-wrap");
   if(existing){ existing.remove(); return; }
 
+  let editRating = c.rating || 0;
   const wrap = document.createElement("div");
   wrap.className = "cmt-edit-wrap";
+
+  // edit stars
+  const estarsEl = document.createElement("div");
+  estarsEl.className = "cmt-edit-stars";
+  for(let i=1;i<=5;i++){
+    const es = document.createElement("span");
+    es.className = "cmt-estar" + (i<=editRating?" on":"");
+    es.textContent = "★"; es.dataset.v = i;
+    es.addEventListener("click",()=>{
+      editRating = i;
+      estarsEl.querySelectorAll(".cmt-estar").forEach(x=>x.classList.toggle("on",+x.dataset.v<=editRating));
+    });
+    estarsEl.appendChild(es);
+  }
+  wrap.appendChild(estarsEl);
 
   const ta = document.createElement("textarea");
   ta.className  = "cmt-edit-area";
@@ -38834,7 +38886,7 @@ function openEdit(card, content, c){
     if(!newText){ showToastCmt("Comment can't be empty","error"); return; }
     saveBtn.disabled=true; saveBtn.textContent="Saving…";
     try{
-      await setDoc(doc(db,"comments",c.uid),{...c, text:newText, edited:true, editedTs:Date.now()});
+      await setDoc(doc(db,"comments",c.uid),{...c, text:newText, rating:editRating, edited:true, editedTs:Date.now()});
       showToastCmt("Updated!","success");
       wrap.remove();
       loadComments();
