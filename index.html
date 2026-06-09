@@ -175,6 +175,13 @@
   .badge.accepted{background:rgba(53,224,127,.12);color:var(--green);border:1px solid rgba(53,224,127,.3)}
   .badge.pending{background:rgba(255,177,59,.12);color:var(--amber);border:1px solid rgba(255,177,59,.3)}
   .badge.rejected{background:rgba(255,59,59,.12);color:var(--red);border:1px solid rgba(255,59,59,.3)}
+  /* clickable status badge with popup */
+  .badge{cursor:pointer;position:relative}
+  #historySection{position:relative !important}
+  .badge-popup{display:none;position:absolute;z-index:200;background:#1a1a2a;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--white);max-width:220px;line-height:1.55;box-shadow:0 8px 28px rgba(0,0,0,.6);pointer-events:none;text-transform:none;letter-spacing:0;font-weight:400}
+  .badge-popup.show{display:block}
+  .badge-popup b{font-weight:700}
+  .badge-popup .bp-title{font-weight:700;font-size:12px;margin-bottom:5px;display:flex;align-items:center;gap:6px}
   .btn-clear{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:8px 14px;font-family:'Inter',sans-serif;font-size:11px;cursor:pointer;transition:all .2s}
   .btn-clear:hover{border-color:var(--red);color:var(--red)}
   .btn-del{background:transparent;border:none;cursor:pointer;padding:5px;border-radius:8px;line-height:1;font-size:15px;transition:background .2s,transform .15s}
@@ -186,19 +193,34 @@
 
   /* ===== HEADER AUTH ===== */
   .hdr-login-btn:hover{box-shadow:0 3px 14px rgba(0,0,0,.26);transform:translateY(-1px)}
-  .hdr-user{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 10px 5px 5px;width:fit-content;align-self:flex-start}
+  .hdr-user{position:relative;display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 10px 5px 5px;width:fit-content;align-self:flex-start;cursor:pointer;user-select:none;transition:border-color .2s,box-shadow .2s}
+  .hdr-user:hover{border-color:var(--red-dim);box-shadow:0 0 0 1px var(--red-dim)}
+  .hdr-user-trigger{display:contents}
   .hdr-av{width:28px;height:28px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--line)}
   .hdr-av img{width:100%;height:100%;display:block;border-radius:50%}
   .hdr-av-letter{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-dim));color:#fff;font-family:'Inter',sans-serif;font-weight:800;font-size:12px;display:grid;place-items:center;border:2px solid var(--line)}
   .hdr-name{font-size:12px;font-weight:600;color:var(--white);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .hdr-logout{background:var(--red);border:none;color:#fff;border-radius:6px;padding:5px 11px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;transition:background .2s;white-space:nowrap}
-  .hdr-logout:hover{background:var(--red-dim)}
-
-  /* ===== LIMIT BANNER ===== */
-  #limitBanner{display:none;background:rgba(255,177,59,.1);border:1px solid rgba(255,177,59,.4);border-radius:11px;padding:11px 16px;margin-bottom:16px;font-size:12px;color:var(--amber);line-height:1.5;text-align:center}
+  .hdr-caret{width:14px;height:14px;color:var(--muted);flex-shrink:0;transition:transform .25s}
+  .hdr-user.open .hdr-caret{transform:rotate(180deg)}
+  /* dropdown signout */
+  .hdr-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;min-width:140px;z-index:500;
+    overflow:hidden;max-height:0;opacity:0;transform:translateY(-6px);
+    transition:max-height .28s cubic-bezier(.4,0,.2,1),opacity .22s ease,transform .22s ease;
+    box-shadow:0 8px 32px rgba(0,0,0,.5)}
+  .hdr-user.open .hdr-dropdown{max-height:80px;opacity:1;transform:translateY(0)}
+  .hdr-logout{width:100%;background:transparent;border:none;color:var(--white);border-radius:8px;padding:9px 14px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:background .18s,color .18s;white-space:nowrap;text-align:left;display:flex;align-items:center;gap:8px}
+  .hdr-logout:hover{background:rgba(255,59,59,.15);color:var(--red)}
+  .hdr-logout svg{width:13px;height:13px;flex-shrink:0}
+  /* cooldown timer in banner */
+  #limitCooldown{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(255,177,59,.08);border:1px solid rgba(255,177,59,.25);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:700;color:var(--amber);font-family:'Inter',sans-serif}
+  #limitCooldown svg{width:13px;height:13px;flex-shrink:0}
+  #limitBanner{display:none;background:rgba(255,177,59,.1);border:1px solid rgba(255,177,59,.4);border-radius:11px;padding:11px 16px;margin-bottom:16px;font-size:12px;color:var(--amber);line-height:1.6;text-align:center}
   #limitBanner.show{display:block}
   #limitBanner b{color:var(--white)}
   #limitBanner .sign-in-link{color:var(--amber);text-decoration:underline;cursor:pointer;font-weight:700}
+
+  /* ===== LIMIT BANNER ===== */
+
 
   /* ===== COMMENTS SECTION ===== */
   #commentsSection{background:#13131e;border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin-top:22px}
@@ -359,6 +381,7 @@
   #tutorialPage{display:none}
   #tutorialPage.show{display:block;animation:slideUp .5s cubic-bezier(.2,.8,.2,1)}
   body.tutorial-mode #mainView{display:none}
+  body.tutorial-mode #commentsSection{display:none}
   .tut-hero{text-align:center;padding:46px 0 26px}
   .tut-hero .tag{display:inline-block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);border:1px solid var(--red-dim);border-radius:999px;padding:5px 14px;margin-bottom:20px;background:rgba(255,59,59,.06)}
   .tut-hero h2{font-family:'Inter',sans-serif;font-weight:800;font-size:clamp(28px,6vw,46px);line-height:1.05;letter-spacing:-1px}
@@ -454,9 +477,17 @@
             Sign in with Google
           </button>
           <div class="hdr-user" id="hdrUser" style="display:none">
-            <div class="hdr-av" id="hdrAv"></div>
-            <span class="hdr-name" id="hdrName"></span>
-            <button class="hdr-logout" id="hdrLogout" type="button">Sign out</button>
+            <div class="hdr-user-trigger">
+              <div class="hdr-av" id="hdrAv"></div>
+              <span class="hdr-name" id="hdrName"></span>
+              <svg class="hdr-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="hdr-dropdown">
+              <button class="hdr-logout" id="hdrLogout" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Sign out
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -554,6 +585,7 @@
   </section>
 
   <section class="card" id="historySection">
+    <div id="badgePopup" class="badge-popup"></div>
     <div class="hist-head">
       <div class="card-title no-dot" style="margin-bottom:0" data-i18n="historyTitle">Conversion History</div>
       <button class="btn-clear" id="clearBtn" data-i18n="clearAll">Clear All</button>
@@ -637,7 +669,7 @@
   </section>
 
   <footer class="reveal" style="animation-delay:.3s">
-    Free &amp; Open · Client-Side Only
+    Free - Easy - 100% Works | © 2026 WrexDev Corps | All rights reserved.
   </footer>
 </div>
 
@@ -38407,7 +38439,7 @@ run();
       var ns=x.normalSpeed||normalSpeedFor(sp);
       var tip=tr("tip",{s:sp,r:normalSpeedFor(sp)}).replace(/<\/?b>/g,"");
       return "<tr><td>"+(i+1)+"</td><td><div class='t-title' title='"+t+"'>"+t+"</div></td>"+
-             "<td><span class='badge "+x.status+"'>"+lab+"</span></td>"+
+             "<td><span class='badge "+x.status+"' data-status='"+x.status+"'>"+lab+"</span></td>"+
              "<td title='"+escapeHtml(tip)+"' style='cursor:help'><b style='color:var(--red)'>"+ns+"</b></td>"+
              "<td class='t-date'>"+ds+"</td>"+
              "<td class='del-cell'><button class='btn-del' type='button' data-del='"+i+"' title='"+escapeHtml(tr("deleteTitle"))+"' aria-label='"+escapeHtml(tr("deleteTitle"))+"'><span class='em-white'>🗑️</span></button></td></tr>";
@@ -38425,6 +38457,90 @@ run();
   histBody.addEventListener("click",function(e){
     var btn=e.target.closest("[data-del]"); if(!btn) return;
     deleteHistory(parseInt(btn.getAttribute("data-del"),10));
+  });
+
+  // ---------- status badge popup ----------
+  var _badgePopup=el("badgePopup");
+  var _badgePopupOpen=false;
+  var STATUS_INFO={
+    accepted:{
+      icon:"✅",
+      title:{"en":"Accepted","id":"Diterima"},
+      desc:{
+        "en":"Your audio has been accepted and approved by Roblox moderation. It is ready to be used as an Asset ID inside your game.",
+        "id":"Audio kamu telah diterima dan disetujui oleh moderasi Roblox. Sekarang siap digunakan sebagai Asset ID di dalam game."
+      }
+    },
+    pending:{
+      icon:"⏳",
+      title:{"en":"Pending","id":"Menunggu"},
+      desc:{
+        "en":"Your audio is currently under review by Roblox moderation. This usually takes a few minutes to a few hours. Check back later.",
+        "id":"Audio kamu sedang ditinjau oleh moderasi Roblox. Proses ini biasanya memakan waktu beberapa menit hingga beberapa jam."
+      }
+    },
+    rejected:{
+      icon:"❌",
+      title:{"en":"Rejected","id":"Ditolak"},
+      desc:{
+        "en":"Your audio was rejected by Roblox moderation and cannot be used. Try re-uploading with a different file or check Roblox's audio policy.",
+        "id":"Audio kamu ditolak oleh moderasi Roblox dan tidak bisa digunakan. Coba unggah ulang dengan file berbeda atau periksa kebijakan audio Roblox."
+      }
+    },
+    fail:{
+      icon:"⚠️",
+      title:{"en":"Failed","id":"Gagal"},
+      desc:{
+        "en":"The conversion process failed. This may be due to an unsupported format, corrupted file, or a server-side issue. Try again with another file.",
+        "id":"Proses konversi gagal. Bisa disebabkan oleh format yang tidak didukung, file rusak, atau masalah server. Coba lagi dengan file lain."
+      }
+    },
+    success:{
+      icon:"🎵",
+      title:{"en":"Success","id":"Berhasil"},
+      desc:{
+        "en":"The audio was converted successfully. Download the .ogg file and upload it to Roblox Creator Dashboard.",
+        "id":"Audio berhasil dikonversi. Unduh file .ogg-nya dan unggah ke Roblox Creator Dashboard."
+      }
+    }
+  };
+  function showBadgePopup(badge, status){
+    if(!_badgePopup) return;
+    var info=STATUS_INFO[status]||STATUS_INFO[status.toLowerCase()]||null;
+    if(!info) return;
+    var lang=(LANG==="id")?"id":"en";
+    _badgePopup.innerHTML=
+      '<div class="bp-title"><span>'+info.icon+'</span><span>'+info.title[lang]+'</span></div>'+
+      '<div>'+info.desc[lang]+'</div>';
+    var parentEl=el("historySection");
+    var badgeRect=badge.getBoundingClientRect();
+    var parentRect=parentEl?parentEl.getBoundingClientRect():{left:0,top:0,width:window.innerWidth};
+    var relLeft=badgeRect.left - parentRect.left;
+    var relTop=badgeRect.bottom - parentRect.top + 8;
+    var pw=230;
+    var maxLeft=(parentRect.width||240) - pw - 8;
+    if(relLeft > maxLeft) relLeft=Math.max(0, maxLeft);
+    _badgePopup.style.left=relLeft+"px";
+    _badgePopup.style.top=relTop+"px";
+    _badgePopup.classList.add("show");
+    _badgePopupOpen=true;
+  }
+  function hideBadgePopup(){
+    if(!_badgePopup) return;
+    _badgePopup.classList.remove("show");
+    _badgePopupOpen=false;
+  }
+  document.addEventListener("click",function(e){
+    var badge=e.target.closest(".badge[data-status]");
+    if(badge){
+      e.stopPropagation();
+      var status=badge.getAttribute("data-status");
+      if(_badgePopupOpen && _badgePopup && _badgePopup._lastBadge===badge){ hideBadgePopup(); return; }
+      if(_badgePopup) _badgePopup._lastBadge=badge;
+      showBadgePopup(badge,status);
+      return;
+    }
+    hideBadgePopup();
   });
 
   // ---------- events ----------
@@ -38668,10 +38784,40 @@ function incDailyUsage(){
   updateLimitBanner();
 }
 
+function getMsUntilMidnight(){
+  const now = new Date();
+  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 0, 0, 0);
+  return midnight - now;
+}
+function fmtCountdown(ms){
+  if(ms <= 0) return "00:00:00";
+  const totalSec = Math.floor(ms / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+  return String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+}
+let _countdownInterval = null;
+function startCountdown(){
+  if(_countdownInterval) return;
+  _countdownInterval = setInterval(()=>{
+    const el = document.getElementById("limitCountdownTimer");
+    if(!el){ clearInterval(_countdownInterval); _countdownInterval=null; return; }
+    const ms = getMsUntilMidnight();
+    el.textContent = fmtCountdown(ms);
+    if(ms <= 0){
+      clearInterval(_countdownInterval); _countdownInterval=null;
+      localStorage.removeItem(LIMIT_KEY);
+      updateLimitBanner();
+    }
+  }, 1000);
+}
+
 function updateLimitBanner(){
   if(currentUser){
     const b = $("limitBanner");
     if(b){ b.classList.remove("show"); }
+    if(_countdownInterval){ clearInterval(_countdownInterval); _countdownInterval=null; }
     return;
   }
   const {count} = getDailyUsage();
@@ -38679,11 +38825,20 @@ function updateLimitBanner(){
   const b = $("limitBanner");
   if(!b) return;
   if(remaining === 0){
-    b.innerHTML = '⚠ You have reached the daily limit of <b>' + DAILY_LIMIT + ' conversions</b>. <span class="sign-in-link" id="bannerSignIn">Sign in with Google</span> for unlimited access.';
+    const ms = getMsUntilMidnight();
+    b.innerHTML =
+      '⚠ You have reached the daily limit of <b>' + DAILY_LIMIT + ' conversions</b>. ' +
+      '<span class="sign-in-link" id="bannerSignIn">Sign in with Google</span> for unlimited access.' +
+      '<br><span id="limitCooldown">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
+        'Resets in <span id="limitCountdownTimer">' + fmtCountdown(ms) + '</span>' +
+      '</span>';
     b.classList.add("show");
     const sl = $("bannerSignIn");
     if(sl) sl.addEventListener("click", ()=> signInWithPopup(auth, new GoogleAuthProvider()).catch(()=>{}));
+    startCountdown();
   } else {
+    if(_countdownInterval){ clearInterval(_countdownInterval); _countdownInterval=null; }
     b.innerHTML = '⚠ Not signed in — <b>' + remaining + ' free conversion' + (remaining===1?'':'s') + ' remaining today</b>. <span class="sign-in-link" id="bannerSignIn">Sign in</span> for unlimited.';
     b.classList.add("show");
     const sl = $("bannerSignIn");
@@ -38716,7 +38871,20 @@ if(cmtSigninHintBtn) cmtSigninHintBtn.addEventListener("click", async()=>{
   try{ await signInWithPopup(auth, new GoogleAuthProvider()); }
   catch(e){ showToastCmt("Sign-in failed: " + e.message, "error"); }
 });
-if(hdrLogout) hdrLogout.addEventListener("click", ()=> signOut(auth));
+if(hdrLogout) hdrLogout.addEventListener("click", (e)=>{ e.stopPropagation(); signOut(auth); });
+
+// Toggle dropdown on user pill click
+if(hdrUser){
+  hdrUser.addEventListener("click", (e)=>{
+    // Don't toggle if clicking the logout button itself
+    if(e.target.closest(".hdr-logout")) return;
+    hdrUser.classList.toggle("open");
+  });
+  // Close when clicking outside
+  document.addEventListener("click", (e)=>{
+    if(!hdrUser.contains(e.target)) hdrUser.classList.remove("open");
+  });
+}
 
 // ─── auth state ──────────────────────────────────────────────
 onAuthStateChanged(auth, async user=>{
@@ -38755,7 +38923,7 @@ onAuthStateChanged(auth, async user=>{
   } else {
     if(hdrLoginBtn) hdrLoginBtn.style.display = "";
     const sh2 = $("cmtSigninHint"); if(sh2) sh2.style.display = "flex";
-    if(hdrUser)     hdrUser.style.display      = "none";
+    if(hdrUser)     { hdrUser.style.display = "none"; hdrUser.classList.remove("open"); }
     $("cmtFormWrap").style.display = "none";
     myLikes.clear();
   }
