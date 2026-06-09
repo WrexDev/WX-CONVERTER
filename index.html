@@ -186,11 +186,11 @@
 
   /* ===== HEADER AUTH ===== */
   .hdr-login-btn:hover{box-shadow:0 3px 14px rgba(0,0,0,.26);transform:translateY(-1px)}
-  .hdr-user{display:flex;align-items:center;gap:8px}
+  .hdr-user{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 10px 5px 5px;width:fit-content;align-self:flex-start}
   .hdr-av{width:28px;height:28px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--line)}
   .hdr-av img{width:100%;height:100%;display:block;border-radius:50%}
   .hdr-av-letter{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-dim));color:#fff;font-family:'Inter',sans-serif;font-weight:800;font-size:12px;display:grid;place-items:center;border:2px solid var(--line)}
-  .hdr-name{font-size:12px;font-weight:600;color:var(--white);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .hdr-name{font-size:12px;font-weight:600;color:var(--white);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .hdr-logout{background:var(--red);border:none;color:#fff;border-radius:6px;padding:5px 11px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;transition:background .2s;white-space:nowrap}
   .hdr-logout:hover{background:var(--red-dim)}
 
@@ -342,13 +342,12 @@
   }
   /* ===== header controls + tutorial button ===== */
   .header-controls{display:flex;align-items:flex-end;gap:0}
-  .hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+  .hdr-right{display:flex;flex-direction:column;align-items:stretch;gap:6px}
   .hdr-login-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#fff;color:#222;border:none;border-radius:8px;padding:7px 13px;font-family:'Inter',sans-serif;font-weight:700;font-size:11px;cursor:pointer;transition:box-shadow .2s,transform .15s;box-shadow:0 2px 7px rgba(0,0,0,.18);width:100%;white-space:nowrap}
   .hdr-login-btn:hover{box-shadow:0 3px 14px rgba(0,0,0,.26);transform:translateY(-1px)}
   .hdr-top-row{display:flex;align-items:center;gap:8px;width:100%}
   #headerAuthArea{display:flex;width:100%}
   .hdr-login-btn{width:100%;justify-content:center}
-  .hdr-user{width:100%;justify-content:space-between}
   .logo{cursor:pointer}
   .tutorial-btn{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);color:var(--white);font-family:inherit;font-size:12px;font-weight:700;padding:8px 16px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s,background .2s,box-shadow .2s;white-space:nowrap}
   .tutorial-btn svg{width:14px;height:14px}
@@ -38447,7 +38446,7 @@ run();
       showToast && showToast("Daily limit reached. Sign in for unlimited access.","error");
       return;
     }
-    if(typeof window._wxIncUsage === "function" && !currentUser) window._wxIncUsage();
+    if(typeof window._wxIncUsage === "function" && !window._wxCurrentUser) window._wxIncUsage();
     startProcess();
   });
 
@@ -38591,6 +38590,7 @@ const auth = getAuth(app);
 const db   = getFirestore(app);
 
 let currentUser  = null;
+window._wxCurrentUser = null; // exposed untuk script non-module
 let allComments  = [];
 let myLikes      = new Set(); // set of comment uids I have liked
 const $          = id => document.getElementById(id);
@@ -38721,6 +38721,7 @@ if(hdrLogout) hdrLogout.addEventListener("click", ()=> signOut(auth));
 // ─── auth state ──────────────────────────────────────────────
 onAuthStateChanged(auth, async user=>{
   currentUser = user;
+  window._wxCurrentUser = user; // sync ke global untuk IIFE
 
   if(user){
     // header: show profile
