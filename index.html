@@ -343,10 +343,10 @@
     <div class="card-title no-dot"><span class="em-white">🛠</span> Converter</div>
 
     <div class="preset-head">
-      <div class="ttl"><span data-i18n="presetActive">Active Preset</span> — <span class="now">Speed <b id="presetNow">2.2x</b> · Amplify <b id="presetGainNow">&minus;4 dB</b></span></div>
+      <div class="ttl"><span data-i18n="presetActive">Active Preset</span> — <span class="now">Speed <b id="presetNow">2.3x</b> · Amplify <b id="presetGainNow">&minus;4 dB</b></span></div>
     </div>
     <div class="preset-opts" id="presetOpts">
-      <div class="preset-opt active" data-speed="2.3" data-gain="-4"><div class="sp">2.2x</div><div class="gn">&minus;4 dB</div></div>
+      <div class="preset-opt active" data-speed="2.3" data-gain="-4"><div class="sp">2.3x</div><div class="gn">&minus;4 dB</div></div>
       <div class="preset-opt" data-speed="2.5" data-gain="-6"><div class="sp">2.4x</div><div class="gn">&minus;6 dB</div></div>
       <div class="preset-opt" data-speed="2.7" data-gain="-8"><div class="sp">2.6x</div><div class="gn">&minus;8 dB</div></div>
     </div>
@@ -386,7 +386,7 @@
 
     <div class="info-chip" id="infoChip" tabindex="0">
       <span class="lab" data-i18n="normalSpeedLabel">Normal Speed (in-game)</span>
-      <span class="val" id="normalSpeedVal">2.2</span>
+      <span class="val" id="normalSpeedVal">2.3</span>
       <span class="qm">?</span>
       <span class="tip-box" id="normalSpeedTip"></span>
     </div>
@@ -37832,7 +37832,7 @@ run();
   function gainStr(db){ return (db<0?"−":(db>0?"+":""))+Math.abs(db)+" dB"; }
   function formatDuration(sec){ if(!isFinite(sec)||sec<=0)return"--:--"; var m=Math.floor(sec/60),s=Math.floor(sec%60); return m+":"+(s<10?"0"+s:s); }
   function formatSize(b){ if(b==null)return"—"; if(b<1024)return b+" B"; if(b<1048576)return (b/1024).toFixed(1)+" KB"; return (b/1048576).toFixed(2)+" MB"; }
-  function normalSpeedFor(speed){ return (speed-0.1).toFixed(1); }            // contoh: 2.3x -> 2.2
+  function normalSpeedFor(speed){ if(speed===2.3) return "2.3"; return (speed-0.1).toFixed(1); }  // 2.3x -> 2.3
   function robloxPlaybackFor(speed){ return (1/speed).toFixed(2); }           // contoh: 2.3x -> 0.43
   function randomStatus(){ var r=Math.random(); return r<0.65?"accepted":(r<0.88?"pending":"rejected"); }
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
@@ -38245,22 +38245,22 @@ run();
   var TUT_STEPS={
     id:[
       {t:"Pilih Audio yang Ingin Di-bypass", d:'Tentukan lagu atau audio yang ingin kamu pakai, lalu unggah ke <b>WX Converter</b> dengan klik kotak upload atau seret filenya langsung. Format yang didukung: <b>mp3, wav, m4a,</b> dan <b>ogg</b>.'},
-      {t:"Pilih Preset Kecepatan", d:'Pilih preset kecepatan sesuai kebutuhanmu (<b>2.2x, 2.4x,</b> atau <b>2.6x</b>). Preset ini menentukan seberapa cepat audio dipercepat sekaligus pengaturan gain volume-nya. Perhatikan angka <b>Normal Speed</b> yang muncul, karena akan kamu pakai lagi nanti di dalam game.'},
+      {t:"Pilih Preset Kecepatan", d:'Pilih preset kecepatan sesuai kebutuhanmu (<b>2.3x, 2.4x,</b> atau <b>2.6x</b>). Preset ini menentukan seberapa cepat audio dipercepat sekaligus pengaturan gain volume-nya. Perhatikan angka <b>Normal Speed</b> yang muncul, karena akan kamu pakai lagi nanti di dalam game.'},
       {t:"Proses Audio & Unduh", d:'Klik tombol <b>Proses Audio</b> lalu tunggu sampai animasi loading mencapai 100%. Setelah selesai, klik tombol <b>Unduh Audio (.ogg)</b> untuk menyimpan hasil konversi ke perangkatmu.'},
       {t:"Upload ke Roblox", d:'Buka <a href="'+ROBLOX_URL+'" target="_blank" rel="noopener">create.roblox.com</a>, lalu masuk ke menu <b>Creator Dashboard › Audio</b>. Unggah file <b>.ogg</b> yang baru saja kamu unduh dan tunggu sampai proses moderasi Roblox menyetujuinya.'},
       {t:"Salin Asset ID Audio", d:'Setelah audio berhasil diunggah dan disetujui, salin <b>Asset ID</b> dari audio tersebut. ID inilah yang akan kamu masukkan ke dalam game.'},
       {t:'Cari Module "MusicConfig"', d:'Di dalam game Roblox kamu, cari ModuleScript bernama <b>"MusicConfig"</b>. Di script inilah seluruh data musik diatur dan dikelola.'},
-      {t:"Tempel Data & Atur PlaybackSpeed", d:'Tempelkan <b>Asset ID</b> beserta data lagunya ke dalam <b>MusicConfig</b>. Pastikan nilai <b>PlaybackSpeed</b> kamu set sama persis dengan angka <b>Normal Speed</b> dari WX Converter (contoh: preset <b>2.2x</b> → PlaybackSpeed = <b>2.2</b>) supaya musik terdengar normal di dalam game.'},
+      {t:"Tempel Data & Atur PlaybackSpeed", d:'Tempelkan <b>Asset ID</b> beserta data lagunya ke dalam <b>MusicConfig</b>. Pastikan nilai <b>PlaybackSpeed</b> kamu set sama persis dengan angka <b>Normal Speed</b> dari WX Converter (contoh: preset <b>2.3x</b> → PlaybackSpeed = <b>2.3</b>) supaya musik terdengar normal di dalam game.'},
       {t:"Selesai!", d:'Simpan perubahanmu lalu jalankan game. Musik kini siap dinikmati dengan kecepatan normal dan proses bypass berhasil sepenuhnya.'}
     ],
     en:[
       {t:"Choose the Audio to Bypass", d:'Decide which song or audio you want to use, then upload it to <b>WX Converter</b> by clicking the upload box or dragging the file in. Supported formats: <b>mp3, wav, m4a,</b> and <b>ogg</b>.'},
-      {t:"Pick a Speed Preset", d:'Select the speed preset you need (<b>2.2x, 2.4x,</b> or <b>2.6x</b>). The preset controls how much the audio is sped up along with its volume gain. Take note of the <b>Normal Speed</b> value shown — you will need it later inside your game.'},
+      {t:"Pick a Speed Preset", d:'Select the speed preset you need (<b>2.3x, 2.4x,</b> or <b>2.6x</b>). The preset controls how much the audio is sped up along with its volume gain. Take note of the <b>Normal Speed</b> value shown — you will need it later inside your game.'},
       {t:"Process the Audio & Download", d:'Click the <b>Process Audio</b> button and wait for the loading animation to reach 100%. Once it finishes, click <b>Download Audio (.ogg)</b> to save the converted file to your device.'},
       {t:"Upload to Roblox", d:'Go to <a href="'+ROBLOX_URL+'" target="_blank" rel="noopener">create.roblox.com</a> and open <b>Creator Dashboard › Audio</b>. Upload the <b>.ogg</b> file you just downloaded and wait for Roblox moderation to approve it.'},
       {t:"Copy the Audio Asset ID", d:'After the audio is uploaded and approved, copy its <b>Asset ID</b>. This is the ID you will plug into your game.'},
       {t:'Find the "MusicConfig" Module', d:'In your Roblox game, locate the ModuleScript named <b>"MusicConfig"</b>. This script is where all of your music data is configured and managed.'},
-      {t:"Paste Data & Set PlaybackSpeed", d:'Paste the <b>Asset ID</b> and its song data into <b>MusicConfig</b>. Make sure the <b>PlaybackSpeed</b> value matches the <b>Normal Speed</b> from WX Converter exactly (e.g. the <b>2.2x</b> preset → PlaybackSpeed = <b>2.2</b>) so the music sounds normal in-game.'},
+      {t:"Paste Data & Set PlaybackSpeed", d:'Paste the <b>Asset ID</b> and its song data into <b>MusicConfig</b>. Make sure the <b>PlaybackSpeed</b> value matches the <b>Normal Speed</b> from WX Converter exactly (e.g. the <b>2.3x</b> preset → PlaybackSpeed = <b>2.3</b>) so the music sounds normal in-game.'},
       {t:"All Done!", d:'Save your changes and run the game. Your music is now ready to enjoy at a normal speed and the bypass is fully complete.'}
     ]
   };
