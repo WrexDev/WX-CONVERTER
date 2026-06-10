@@ -566,8 +566,8 @@
     </div>
     <div class="preset-opts" id="presetOpts">
       <div class="preset-opt active" data-speed="2.3" data-gain="-4"><div class="sp">2.3x</div><div class="gn">&minus;4 dB</div></div>
-      <div class="preset-opt" data-speed="2.5" data-gain="-6"><div class="sp">2.4x</div><div class="gn">&minus;6 dB</div></div>
-      <div class="preset-opt" data-speed="2.7" data-gain="-8"><div class="sp">2.6x</div><div class="gn">&minus;8 dB</div></div>
+      <div class="preset-opt" data-speed="2.5" data-gain="-6"><div class="sp">2.5x</div><div class="gn">&minus;6 dB</div></div>
+      <div class="preset-opt" data-speed="2.7" data-gain="-8"><div class="sp">2.7x</div><div class="gn">&minus;8 dB</div></div>
     </div>
 
     <div class="drop" id="dropzone">
@@ -38106,7 +38106,7 @@ run();
   function gainStr(db){ return (db<0?"−":(db>0?"+":""))+Math.abs(db)+" dB"; }
   function formatDuration(sec){ if(!isFinite(sec)||sec<=0)return"--:--"; var m=Math.floor(sec/60),s=Math.floor(sec%60); return m+":"+(s<10?"0"+s:s); }
   function formatSize(b){ if(b==null)return"—"; if(b<1024)return b+" B"; if(b<1048576)return (b/1024).toFixed(1)+" KB"; return (b/1048576).toFixed(2)+" MB"; }
-  function normalSpeedFor(speed){ if(speed===2.3) return "2.3"; return (speed-0.1).toFixed(1); }  // 2.3x -> 2.3
+  function normalSpeedFor(speed){ if(speed===2.3) return "2.3"; if(speed===2.5) return "2.5"; if(speed===2.7) return "2.7"; return (speed-0.1).toFixed(1); }  // 2.3x->2.3, 2.5x->2.5, 2.7x->2.7
   function robloxPlaybackFor(speed){ return (1/speed).toFixed(2); }           // contoh: 2.3x -> 0.43
 
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
@@ -38522,7 +38522,7 @@ run();
       var ns=x.normalSpeed||normalSpeedFor(sp);
       var pbVal="PlaybackSpeed = "+ns+",";
       var nsNum=parseFloat(ns);
-      var nsColor=(nsNum===2.3?"var(--green)":nsNum===2.4?"#4da6ff":nsNum===2.6?"#b07cff":"var(--white)");
+      var nsColor=(nsNum===2.3?"var(--green)":nsNum===2.5?"#4da6ff":nsNum===2.7?"#b07cff":"var(--white)");
       var tip=tr("tip",{s:sp,r:normalSpeedFor(sp)}).replace(/<\/?b>/g,"");
       var pbLabel="PlaybackSpeed = <span style=\'color:"+nsColor+";font-weight:800\'>"+escapeHtml(ns)+"</span>,";
       var copyVal="PlaybackSpeed = "+ns+",";
@@ -38703,7 +38703,7 @@ run();
   var TUT_STEPS={
     id:[
       {t:"Pilih Audio yang Ingin Di-bypass", d:'Tentukan lagu atau audio yang ingin kamu pakai, lalu unggah ke <b>WX Converter</b> dengan klik kotak upload atau seret filenya langsung. Format yang didukung: <b>mp3, wav, m4a,</b> dan <b>ogg</b>.'},
-      {t:"Pilih Preset Kecepatan", d:'Pilih preset kecepatan sesuai kebutuhanmu (<b>2.3x, 2.4x,</b> atau <b>2.6x</b>). Preset ini menentukan seberapa cepat audio dipercepat sekaligus pengaturan gain volume-nya. Perhatikan angka <b>Normal Speed</b> yang muncul, karena akan kamu pakai lagi nanti di dalam game.'},
+      {t:"Pilih Preset Kecepatan", d:'Pilih preset kecepatan sesuai kebutuhanmu (<b>2.3x, 2.5x,</b> atau <b>2.7x</b>). Preset ini menentukan seberapa cepat audio dipercepat sekaligus pengaturan gain volume-nya. Perhatikan angka <b>Normal Speed</b> yang muncul, karena akan kamu pakai lagi nanti di dalam game.'},
       {t:"Proses Audio & Unduh", d:'Klik tombol <b>Proses Audio</b> lalu tunggu sampai animasi loading mencapai 100%. Setelah selesai, klik tombol <b>Unduh Audio (.ogg)</b> untuk menyimpan hasil konversi ke perangkatmu.'},
       {t:"Upload ke Roblox", d:'Buka <a href="'+ROBLOX_URL+'" target="_blank" rel="noopener">create.roblox.com</a>, lalu masuk ke menu <b>Creator Dashboard › Audio</b>. Unggah file <b>.ogg</b> yang baru saja kamu unduh dan tunggu sampai proses moderasi Roblox menyetujuinya.'},
       {t:"Salin Asset ID Audio", d:'Setelah audio berhasil diunggah dan disetujui, salin <b>Asset ID</b> dari audio tersebut. ID inilah yang akan kamu masukkan ke dalam game.'},
@@ -38713,7 +38713,7 @@ run();
     ],
     en:[
       {t:"Choose the Audio to Bypass", d:'Decide which song or audio you want to use, then upload it to <b>WX Converter</b> by clicking the upload box or dragging the file in. Supported formats: <b>mp3, wav, m4a,</b> and <b>ogg</b>.'},
-      {t:"Pick a Speed Preset", d:'Select the speed preset you need (<b>2.3x, 2.4x,</b> or <b>2.6x</b>). The preset controls how much the audio is sped up along with its volume gain. Take note of the <b>Normal Speed</b> value shown — you will need it later inside your game.'},
+      {t:"Pick a Speed Preset", d:'Select the speed preset you need (<b>2.3x, 2.5x,</b> or <b>2.7x</b>). The preset controls how much the audio is sped up along with its volume gain. Take note of the <b>Normal Speed</b> value shown — you will need it later inside your game.'},
       {t:"Process the Audio & Download", d:'Click the <b>Process Audio</b> button and wait for the loading animation to reach 100%. Once it finishes, click <b>Download Audio (.ogg)</b> to save the converted file to your device.'},
       {t:"Upload to Roblox", d:'Go to <a href="'+ROBLOX_URL+'" target="_blank" rel="noopener">create.roblox.com</a> and open <b>Creator Dashboard › Audio</b>. Upload the <b>.ogg</b> file you just downloaded and wait for Roblox moderation to approve it.'},
       {t:"Copy the Audio Asset ID", d:'After the audio is uploaded and approved, copy its <b>Asset ID</b>. This is the ID you will plug into your game.'},
