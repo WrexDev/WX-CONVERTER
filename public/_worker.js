@@ -1,5 +1,5 @@
 /**
- * WX Converter — Worker gabungan
+ * WX Converter â€” Worker gabungan
  *   - menyajikan situs (index.html) lewat Static Assets
  *   - menangani OAuth 2.0 Roblox + upload audio
  *
