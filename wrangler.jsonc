@@ -1,0 +1,19 @@
+{
+  "name": "wx-converter",
+  "main": "src/index.js",
+  "compatibility_date": "2025-01-01",
+
+  // Semua file di folder "public" disajikan apa adanya.
+  // Taruh index.html di dalam public/
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+
+  "kv_namespaces": [
+    {
+      "binding": "SESSIONS",
+      "id": "ISI_DENGAN_KV_ID"
+    }
+  ]
+}
